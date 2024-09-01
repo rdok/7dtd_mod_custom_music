@@ -30,8 +30,9 @@
 [*] For more information on the Digital Millennium Copyright Act (DMCA) and GitHub's response, see: [url=https://github.blog/news-insights/policy-news-and-insights/standing-up-for-developers-youtube-dl-is-back/]Standing up for developers: youtube-dl is back[/url].[/list]
 [*] I recommend adding music that isn't intense; although for the average player this is not an issue, for players like me who play multiple hours per day, playing consistent intense music quickly becomes tiring/annoying. I have found that ambient music similar to the style of [i]Red Dead Redemption 2[/i]'s soundtrack provides a more relaxing experience.
 [list]
-[*] You might want to explore tracks from the [url=https://www.youtube.com/playlist?list=PLeZn0JLtzRu2hHLf8EWbWkaZFWeCp3wrf]RDR2 ambient music playlist[/url]. These tracks provide lots of breathing room and can be listened to for hundreds of hours without causing listener fatigue.
-[/list][/list]
+[*] You might want to explore tracks from the [url=https://www.youtube.com/playlist?list=PLeZn0JLtzRu2hHLf8EWbWkaZFWeCp3wrf]RDR2 ambient music playlist[/url]. These tracks provide lots of breathing room and can be listened to for hundreds of hours without causing listener fatigue.[/list]
+[*] I also recommend using this mod together with [url=https://www.nexusmods.com/7daystodie/mods/5749]Phantom Silence[/url] mod, or any other that disable the creep ambient noises during nighttime and day-night transition cues. 
+[/list]
 [size=5]Backlog[/size]
 [list]
 [*] Lower a bit the music level; even on 13% it's sounds a bit high.
@@ -64,6 +65,9 @@ Track description:  Superb suspenseful cinematic music by Hayden Folker. "The Re
 [*] To play the audio tracks this mod uses [url=https://github.com/naudio/NAudio]naudio/NAudio[/url], an Audio and MIDI library for .NET. As of the version [url=https://github.com/naudio/NAudio/releases/tag/v2.2.1]2.2.1[/url] this library can be used under MIT License. The MIT License is a permissive open-source license that allows software to be freely used, modified, distributed, and used for commercial purposes.
 [/list]
 [size=5]Changelog[/size]
+[size=3]v1.0.2 - 01-Sept-24[/size]
+[list]
+[*] fix: Dynamic volume was not setting the right volume, using stale variable.[/list]
 [size=3]v1.0.1 - 01-Sept-24[/size]
 [list]
 [*] fix: Dynamic volume was not listening to the master volume upon track change.[/list]

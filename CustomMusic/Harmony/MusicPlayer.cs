@@ -18,7 +18,6 @@ namespace CustomMusic.Harmony
         private static int currentTrackIndex = -1;
         private static int previousTrackIndex = -1;
         private static float lastVolumeSetting = -1f;
-        private static readonly float customMusicVolume = 1.0f; // Base volume control for custom music
         private static readonly System.Random random = new System.Random();
 
         public static bool Prefix(Conductor __instance)
@@ -106,27 +105,24 @@ namespace CustomMusic.Harmony
             var linearDynamicMusicVolume = Mathf.Pow(10, dynamicMusicVolume / 20);
 
             // Calculate the final volume by multiplying the linear dynamic music volume with the master volume
-            var finalVolume = customMusicVolume * linearDynamicMusicVolume * masterVolume;
+            var finalVolume = linearDynamicMusicVolume * masterVolume;
 
             // Log the volume values for debugging
+            Logger.Info($"CustomMusicPlayer: Dynamic music volume (in decibels): {dynamicMusicVolume}");
             Logger.Info($"CustomMusicPlayer: Linear dynamic music volume: {linearDynamicMusicVolume}");
-            Logger.Info($"CustomMusicPlayer: Linear master volume (capped at 1f): {masterVolume}");
+            Logger.Info($"CustomMusicPlayer: Master volume (capped at 1f): {masterVolume}");
             Logger.Info($"CustomMusicPlayer: Final volume (linear scale): {finalVolume}");
 
-            // Check if the volume needs to be updated
-            if (audioFile != null && Math.Abs(finalVolume - lastVolumeSetting) > 0.01f)
+            // Immediately apply the volume without interpolation
+            if (audioFile != null)
             {
                 audioFile.Volume = finalVolume;
-                Logger.Info($"CustomMusicPlayer: Volume applied: {finalVolume}");
+                Logger.Info($"CustomMusicPlayer: Volume applied immediately: {finalVolume}");
 
                 lastVolumeSetting = finalVolume;
                 Logger.Info($"CustomMusicPlayer: Volume successfully updated to {finalVolume * 100}%.");
             }
-            else
-            {
-                Logger.Info(
-                    $"CustomMusicPlayer: No significant volume change detected. Current volume: {lastVolumeSetting * 100}%");
-            }
         }
+
     }
 }

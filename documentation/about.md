@@ -23,6 +23,7 @@
   - For more information on the Digital Millennium Copyright Act (DMCA) and GitHub's response, see: [Standing up for developers: youtube-dl is back](https://github.blog/news-insights/policy-news-and-insights/standing-up-for-developers-youtube-dl-is-back/).
 - I recommend adding music that isn't intense; although for the average player this is not an issue, for players like me who play multiple hours per day, playing consistent intense music quickly becomes tiring/annoying. I have found that ambient music similar to the style of *Red Dead Redemption 2*'s soundtrack provides a more relaxing experience.
   - You might want to explore tracks from the [RDR2 ambient music playlist](https://www.youtube.com/playlist?list=PLeZn0JLtzRu2hHLf8EWbWkaZFWeCp3wrf). These tracks provide lots of breathing room and can be listened to for hundreds of hours without causing listener fatigue.
+- I also recommend using this mod together with [Phantom Silence](https://www.nexusmods.com/7daystodie/mods/5749) mod, or any other that disable the creep ambient noises during nighttime and day-night transition cues. 
   
 ## Backlog
 - Lower a bit the music level; even on 13% it's sounds a bit high.
@@ -48,6 +49,8 @@
 - To play the audio tracks this mod uses [naudio/NAudio](https://github.com/naudio/NAudio), an Audio and MIDI library for .NET. As of the version [2.2.1](https://github.com/naudio/NAudio/releases/tag/v2.2.1) this library can be used under MIT License. The MIT License is a permissive open-source license that allows software to be freely used, modified, distributed, and used for commercial purposes.
 
 ## Changelog  
+#### v1.0.2 - 01-Sept-24
+- fix: Dynamic volume was not setting the right volume, using stale variable.
 #### v1.0.1 - 01-Sept-24
 - fix: Dynamic volume was not listening to the master volume upon track change.
 #### v1.0.0 - 01-Sept-24
