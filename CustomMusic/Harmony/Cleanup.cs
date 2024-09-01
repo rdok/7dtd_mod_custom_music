@@ -12,15 +12,15 @@ namespace CustomMusic.Harmony
         {
             Logger.Info("CustomMusicPlayerCleanup: Cleaning up resources.");
 
-            if (CustomMusicPlayer.audioFile != null)
+            if (MusicPlayer.audioFile != null)
             {
-                CustomMusicPlayer.audioFile.Dispose();
+                MusicPlayer.audioFile.Dispose();
                 Logger.Info("CustomMusicPlayerCleanup: Disposed of AudioFileReader.");
             }
             
-            if (CustomMusicPlayer.outputDevice == null) return;
+            if (MusicPlayer.outputDevice == null) return;
             
-            CustomMusicPlayer.outputDevice.Dispose();
+            MusicPlayer.outputDevice.Dispose();
             
             Logger.Info("CustomMusicPlayerCleanup: Disposed of WaveOutEvent.");
         }

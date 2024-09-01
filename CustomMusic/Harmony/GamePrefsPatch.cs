@@ -17,8 +17,8 @@ namespace CustomMusic.Harmony
 
             var isEnabled = GamePrefs.GetBool(EnumGamePrefs.OptionsDynamicMusicEnabled);
 
-            CustomMusicPlayer.IsCustomMusicEnabled = isEnabled;
-            CustomMusicPlayer.UpdateVolume();
+            MusicPlayer.IsCustomMusicEnabled = isEnabled;
+            MusicPlayer.UpdateVolume();
             ;
         }
     }

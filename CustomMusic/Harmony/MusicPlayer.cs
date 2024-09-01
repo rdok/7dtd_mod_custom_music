@@ -8,7 +8,7 @@ using UnityEngine;
 namespace CustomMusic.Harmony
 {
     [HarmonyPatch(typeof(Conductor), nameof(Conductor.Update))]
-    public static class CustomMusicPlayer
+    public static class MusicPlayer
     {
         public static bool IsCustomMusicEnabled { get; set; } = true;
 
@@ -30,7 +30,7 @@ namespace CustomMusic.Harmony
                 return false; // Allow the original Update method to proceed
             }
 
-            var customTracks = LoadCustomTracks.GetCustomTracks();
+            var customTracks = LoadTracks.GetCustomTracks();
             if (customTracks == null || customTracks.Length == 0)
             {
                 Logger.Info("CustomMusicPlayer: No custom music loaded, skipping Update.");

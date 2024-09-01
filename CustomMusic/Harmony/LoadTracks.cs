@@ -8,10 +8,10 @@ using HarmonyLib;
 namespace CustomMusic.Harmony
 {
     [HarmonyPatch(typeof(Conductor), nameof(Conductor.Init))]
-    public static class LoadCustomTracks
+    public static class LoadTracks
     {
         private static readonly ILogger Logger = new Logger();
-        private static string[] customTracks;
+        private static string[] _tracks;
 
         public static bool Prefix()
         {
@@ -19,24 +19,29 @@ namespace CustomMusic.Harmony
 
             var modPath = Assembly.GetExecutingAssembly().Location;
             var modDirectory = Path.GetDirectoryName(modPath);
-            var musicDirectory = Path.Combine(modDirectory, "Tracks");
+            var missingModPathError = new InvalidOperationException(
+                $"Missing tracks directory: {modPath}"
+            );
+            var musicDirectory = Path
+                .Combine(modDirectory ?? throw missingModPathError, "AmbientTracks");
+
             Logger.Info(
                 "CustomMusicPlayerInit: Checking for music directory at " +
                 $"{musicDirectory}.");
 
             string[] validExtensions = { ".mp3", ".wav", ".aiff", ".flac" };
 
-            customTracks = Directory
+            _tracks = Directory
                 .GetFiles(musicDirectory, "*.*")
                 .Where(file => validExtensions
                     .Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase))
                 ).ToArray();
 
             Logger.Info("CustomMusicPlayerInit: Found "
-                        + $"{customTracks.Length} supported audio files in "
+                        + $"{_tracks.Length} supported audio files in "
                         + $"{musicDirectory}.");
 
-            if (customTracks.Length == 0)
+            if (_tracks.Length == 0)
             {
                 Logger.Info(
                     $"CustomMusicPlayerInit: No supported audio files found in {musicDirectory}. " +
@@ -50,7 +55,7 @@ namespace CustomMusic.Harmony
 
         public static string[] GetCustomTracks()
         {
-            return customTracks;
+            return _tracks;
         }
     }
 }
