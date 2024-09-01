@@ -64,7 +64,6 @@ namespace CustomMusic.Harmony
             if (outputDevice == null) return;
 
             outputDevice.Stop();
-
             Logger.Info("CustomMusicPlayer: Stopped output device.");
         }
 
@@ -83,11 +82,9 @@ namespace CustomMusic.Harmony
                 Logger.Info("CustomMusicPlayer: Disposed of previous AudioFileReader.");
             }
 
-            audioFile = new AudioFileReader(customTracks[currentTrackIndex])
-            {
-                Volume = customMusicVolume // Set initial custom music volume here
-            };
+            audioFile = new AudioFileReader(customTracks[currentTrackIndex]);
             outputDevice.Init(audioFile);
+            UpdateVolume(); // Adjust volume immediately based on game master volume
             outputDevice.Play();
             Logger.Info($"CustomMusicPlayer: Started playing {Path.GetFileName(customTracks[currentTrackIndex])}.");
 
