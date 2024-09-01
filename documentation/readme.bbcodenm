@@ -1,11 +1,11 @@
 [size=6]7 Days to Die Mod - No Combat Music[/size]
-[url=https://next.nexusmods.com/7daystodie/collections/epfqzi][img]https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://www.nexusmods.com/7daystodie/mods/6035][img]https://img.shields.io/badge/Nexus%20Mod-Custom%20Music%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://github.com/rdok/7daystodie_mod_custom_music][img]https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github[/img][/url]
+[url=https://next.nexusmods.com/7daystodie/collections/epfqzi][img]https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://www.nexusmods.com/7daystodie/mods/6035][img]https://img.shields.io/badge/Nexus%20Mod-Custom%20Music%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://github.com/rdok/7dtd_mod_custom_music][img]https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github[/img][/url]
 
 [quote]
 [b]Custom Music:[/b] Replace the dynamic music with your own music.
 [b]EAC:[/b] This mod uses custom code that is not compatible with Easy Anti-Cheat (EAC).
 [/quote]
-[url=https://www.nexusmods.com/7daystodie/mods/6035][img]https://github.com/rdok/7daystodie_mod_custom_music/blob/main/documentation/showcase.jpg?raw=true[/img][/url]
+[url=https://www.nexusmods.com/7daystodie/mods/6035][img]https://github.com/rdok/7dtd_mod_custom_music/blob/main/documentation/showcase.jpg?raw=true[/img][/url]
 
 [size=5]Features[/size]
 [quote]
@@ -67,10 +67,8 @@ Track description:  Superb suspenseful cinematic music by Hayden Folker. "The Re
 [size=5]Changelog[/size]
 [size=3]v1.0.0[/size]
 [list]
-[*] Overrides:
-[list]
-[*] Dynamic music: Exploration, Suspense, Combat, Bloodmoon, HomeDay, HomeNight, TraderBob, TraderHugh, TraderJen, TraderJoel, TraderRekt.
-[*] when pausing the game. [/list]
+[*] Overrides: Dynamic music: Exploration, Suspense, Combat, Bloodmoon, HomeDay, HomeNight, TraderBob, TraderHugh, TraderJen, TraderJoel, TraderRekt.
+[*] Overrides when pausing the game. 
 [*] Supports changing volume.
 [*] Ambient music such as crickets sound are NOT overriden.
 [*] Add two free tracks (Creative Commons).

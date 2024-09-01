@@ -1,10 +1,10 @@
 {
   "repository": {
     "type": "git",
-    "url": "https://github.com/rdok/7daystodie_mod_custom_music"
+    "url": "https://github.com/rdok/7dtd_mod_custom_music"
   },
   "author": "Rizart Dokollari",
-  "name": "7daystodie_mod_custom_music",
+  "name": "7dtd_mod_custom_music",
   "license": "GPL-3.0",
   "devDependencies": {
     "7z-bin": "Nexus-Mods/7z-bin",
