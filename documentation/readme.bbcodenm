@@ -2,15 +2,12 @@
 [url=https://next.nexusmods.com/7daystodie/collections/epfqzi][img]https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://www.nexusmods.com/7daystodie/mods/6035][img]https://img.shields.io/badge/Nexus%20Mod-Custom%20Music%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://github.com/rdok/7dtd_mod_custom_music][img]https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github[/img][/url]
 
 [quote]
-[b]Custom Music:[/b] Replace the dynamic music with your own music.
+[b]Custom Music:[/b] Replace the dynamic music with your own music. mp3, wav, and aiff.
 [b]EAC:[/b] This mod uses custom code that is not compatible with Easy Anti-Cheat (EAC).
 [/quote]
 [url=https://www.nexusmods.com/7daystodie/mods/6035][img]https://github.com/rdok/7dtd_mod_custom_music/blob/main/documentation/showcase.jpg?raw=true[/img][/url]
 
 [size=5]Features[/size]
-[quote]
-The following features are subject change primarily to own my gaming experience, and secondary to other players' feedback. In cases where these conflict I will provide a Gears mod settings to allow customizations.
-[/quote]
 [list]
 [*] Overrides:
 [list]
@@ -19,7 +16,9 @@ The following features are subject change primarily to own my gaming experience,
 [*] Supports changing volume
 [*] Ambient music such as crickets sound are NOT overriden.
 [*] Includes two free tracks (Creative Commons). See credits section.
-[*] Supports mp3 & wav; as well as aiff & flac, although I haven't tested the two later. 
+[list]
+[*] [url=https://www.nexusmods.com/7daystodie/mods/6035?tab=videos#lg=2&slide=0]YouTube Showcase[/url] [/list]
+[*] Supports mp3, wav; and aiff, although the latter hasn't been tested.
 [list]
 [*] The two included tracks are in mp3 & wav formats[/list]
 [*] Plays tracks in random, and ensures no two tracks are played in the same order.
@@ -72,6 +71,6 @@ Track description:  Superb suspenseful cinematic music by Hayden Folker. "The Re
 [*] Supports changing volume.
 [*] Ambient music such as crickets sound are NOT overriden.
 [*] Add two free tracks (Creative Commons).
-[*] Supports mp3 & wav; as well as aiff & flac
+[*] Supports mp3 & wav; as well as aiff.
 [*] Plays tracks in random, and ensures no two tracks are played in the same order.
 [/list]

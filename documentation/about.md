@@ -1,20 +1,20 @@
 # 7 Days to Die Mod - No Combat Music
 [![nexus-mods-collection-immersive-hud](https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla)](https://next.nexusmods.com/7daystodie/collections/epfqzi) [![nexus-mods-page](https://img.shields.io/badge/Nexus%20Mod-Custom%20Music%20-orange?style=flat-square&logo=spinrilla)](https://www.nexusmods.com/7daystodie/mods/6035) [![github-repository](https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github)](https://github.com/rdok/7dtd_mod_custom_music)
 
-> **Custom Music:** Replace the dynamic music with your own music.
+> **Custom Music:** Replace the dynamic music with your own music. mp3, wav, and aiff.
 > **EAC:** This mod uses custom code that is not compatible with Easy Anti-Cheat (EAC).
 
 [![Showcase](https://github.com/rdok/7dtd_mod_custom_music/blob/main/documentation/showcase.jpg?raw=true)](https://www.nexusmods.com/7daystodie/mods/6035)
 
 ## Features
-> The following features are subject change primarily to own my gaming experience, and secondary to other players' feedback. In cases where these conflict I will provide a Gears mod settings to allow customizations.
 - Overrides:
     - Dynamic music: Exploration, Suspense, Combat, Bloodmoon, HomeDay, HomeNight, TraderBob, TraderHugh, TraderJen, TraderJoel, TraderRekt.
     - when pausing the game 
 - Supports changing volume
 - Ambient music such as crickets sound are NOT overriden.
 - Includes two free tracks (Creative Commons). See credits section.
-- Supports mp3 & wav; as well as aiff & flac, although I haven't tested the two later. 
+  - [YouTube Showcase](https://www.nexusmods.com/7daystodie/mods/6035?tab=videos#lg=2&slide=0) 
+- Supports mp3, wav; and aiff, although the latter hasn't been tested.
   - The two included tracks are in mp3 & wav formats
 - Plays tracks in random, and ensures no two tracks are played in the same order.
 
@@ -54,5 +54,5 @@
 - Supports changing volume.
 - Ambient music such as crickets sound are NOT overriden.
 - Add two free tracks (Creative Commons).
-- Supports mp3 & wav; as well as aiff & flac
+- Supports mp3 & wav; as well as aiff.
 - Plays tracks in random, and ensures no two tracks are played in the same order.
