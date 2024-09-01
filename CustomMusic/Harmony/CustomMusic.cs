@@ -10,24 +10,31 @@ namespace CustomMusic.Harmony
     [HarmonyPatch(typeof(Conductor), nameof(Conductor.Update))]
     public static class CustomMusicPlayer
     {
+        public static bool IsCustomMusicEnabled { get; set; } = true;
+
         private static readonly ILogger Logger = new Logger();
         public static WaveOutEvent outputDevice;
         public static AudioFileReader audioFile;
         private static int currentTrackIndex = -1;
         private static int previousTrackIndex = -1;
         private static float lastVolumeSetting = -1f;
-        private static float customMusicVolume = 1.0f;  // Base volume control for custom music
+        private static float customMusicVolume = 1.0f; // Base volume control for custom music
         private static readonly System.Random random = new System.Random();
 
         public static bool Prefix(Conductor __instance)
         {
-            Logger.Info("CustomMusicPlayer: Starting Update function override.");
+            if (!IsCustomMusicEnabled)
+            {
+                StopMusic();
+                Logger.Info("CustomMusicPlayer: Custom music is disabled. Skipping custom music playback.");
+                return false; // Allow the original Update method to proceed
+            }
 
-            var customTracks = CustomMusicPlayerInit.GetCustomTracks();
+            var customTracks = LoadCustomTracks.GetCustomTracks();
             if (customTracks == null || customTracks.Length == 0)
             {
                 Logger.Info("CustomMusicPlayer: No custom music loaded, skipping Update.");
-                return false;
+                return false; // Allow the original Update method to proceed if no tracks are available
             }
 
             if (outputDevice == null)
@@ -42,9 +49,23 @@ namespace CustomMusic.Harmony
                 PlayRandomTrack(customTracks);
             }
 
-            UpdateVolume();
-            Logger.Info("CustomMusicPlayer: Completed Update function override.");
-            return false;
+            return false; // Skip the original Update method since we've handled music playback
+        }
+
+        private static void StopMusic()
+        {
+            if (audioFile != null)
+            {
+                audioFile.Dispose();
+                audioFile = null;
+                Logger.Info("CustomMusicPlayer: Stopped and disposed of custom music.");
+            }
+
+            if (outputDevice == null) return;
+
+            outputDevice.Stop();
+
+            Logger.Info("CustomMusicPlayer: Stopped output device.");
         }
 
         private static void PlayRandomTrack(string[] customTracks)
@@ -73,41 +94,29 @@ namespace CustomMusic.Harmony
             previousTrackIndex = currentTrackIndex;
         }
 
-        private static void UpdateVolume()
+        public static void UpdateVolume()
         {
-            if (!GameManager.Instance.masterAudioMixer.GetFloat("dmsVol", out float masterVolume))
+            if (!GameManager.Instance.masterAudioMixer.GetFloat("dmsVol", out var masterVolume))
             {
                 Logger.Error("CustomMusicPlayer: Failed to retrieve 'dmsVol' from masterAudioMixer.");
                 return;
             }
 
-            float gameVolume = Mathf.Pow(10, masterVolume / 20);  // Convert dB to linear volume
-            float adjustedVolume = customMusicVolume * gameVolume;  // Adjust custom music volume by game's master volume
+            var linearVolumeFromDecibel = Mathf.Pow(10, masterVolume / 20);
+            var adjustedVolumeToGameMasterVolume = customMusicVolume * linearVolumeFromDecibel;
 
-            if (Math.Abs(adjustedVolume - lastVolumeSetting) <= 0.01f)
+            if (Math.Abs(adjustedVolumeToGameMasterVolume - lastVolumeSetting) <= 0.01f)
             {
-                Logger.Info("CustomMusicPlayer: Volume has not changed since the last update.");
                 return;
             }
 
             if (audioFile != null)
             {
-                audioFile.Volume = adjustedVolume;  // Apply adjusted volume to the specific audio file
+                audioFile.Volume = adjustedVolumeToGameMasterVolume; 
             }
 
-            lastVolumeSetting = adjustedVolume;
-            Logger.Info($"CustomMusicPlayer: Volume successfully updated to {adjustedVolume * 100}%.");
-        }
-
-        public static void SetCustomMusicVolume(float volume)
-        {
-            customMusicVolume = Mathf.Clamp(volume, 0.0f, 1.0f);
-            if (audioFile != null)
-            {
-                float masterVolume = Mathf.Pow(10, lastVolumeSetting / 20);  // Assume lastVolumeSetting is the last known game volume in dB
-                audioFile.Volume = customMusicVolume * masterVolume;
-                Logger.Info($"CustomMusicPlayer: Custom music volume updated to {customMusicVolume * 100}%.");
-            }
+            lastVolumeSetting = adjustedVolumeToGameMasterVolume;
+            Logger.Info($"CustomMusicPlayer: Volume successfully updated to {adjustedVolumeToGameMasterVolume * 100}%.");
         }
     }
 }
