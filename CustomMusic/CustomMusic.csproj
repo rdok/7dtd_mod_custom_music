@@ -14,7 +14,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModName>CustomMusic</ModName>
-        <ModVersion>1.5.0</ModVersion>
+        <ModVersion>1.0.0</ModVersion>
         <ModDescription>Replace the dynamic music with your own music.</ModDescription>
         <ModId>6035</ModId>
     </PropertyGroup>
@@ -39,12 +39,12 @@
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="Harmony\Cleanup.cs" />
-        <Compile Include="Harmony\LoadTracks.cs" />
-        <Compile Include="Harmony\GamePrefsPatch.cs" />
+        <Compile Include="Harmony\Cleanup.cs"/>
+        <Compile Include="Harmony\LoadTracks.cs"/>
+        <Compile Include="Harmony\GamePrefsPatch.cs"/>
         <Compile Include="Harmony\Init.cs"/>
         <Compile Include="Harmony\Logger.cs"/>
-        <Compile Include="Harmony\MusicPlayer.cs" />
+        <Compile Include="Harmony\MusicPlayer.cs"/>
         <Compile Include="Harmony\NoPauseGame.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
@@ -115,6 +115,10 @@
     </ItemGroup>
 
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+
+    <Target Name="BeforeBuild">
+        <RemoveDir Directories="$(OutputPath)"/>
+    </Target>
 
     <Target Name="AfterBuild">
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Name/@value" Value="$(ModName)"/>
