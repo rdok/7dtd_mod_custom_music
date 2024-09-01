@@ -49,14 +49,16 @@
 - To play the audio tracks this mod uses [naudio/NAudio](https://github.com/naudio/NAudio), an Audio and MIDI library for .NET. As of the version [2.2.1](https://github.com/naudio/NAudio/releases/tag/v2.2.1) this library can be used under MIT License. The MIT License is a permissive open-source license that allows software to be freely used, modified, distributed, and used for commercial purposes.
 
 ## Changelog  
-#### v1.0.0
-- Overrides: Dynamic music: Exploration, Suspense, Combat, Bloodmoon, HomeDay, HomeNight, TraderBob, TraderHugh, TraderJen, TraderJoel, TraderRekt.
-- Overrides when pausing the game. 
-- Supports changing volume.
-- Ambient music such as crickets sound are NOT overriden.
-- Add two free tracks (Creative Commons).
-- Supports mp3 & wav; as well as aiff.
-- Plays tracks in random, and ensures no two tracks are played in the same order.
+#### v1.0.1 - 01-Sept-24
+- fix: Dynamic volume was not listening to the master volume upon track change.
+#### v1.0.0 - 01-Sept-24
+- feat: Overrides: Dynamic music: Exploration, Suspense, Combat, Bloodmoon, HomeDay, HomeNight, TraderBob, TraderHugh, TraderJen, TraderJoel, TraderRekt.
+- feat: Overrides when pausing the game. 
+- feat: Supports changing volume.
+- feat: Ambient music such as crickets sound are NOT overriden.
+- feat: Add two free tracks (Creative Commons).
+- feat: Supports mp3 & wav; as well as aiff.
+- feat: Plays tracks in random, and ensures no two tracks are played in the same order.
 
 
 ***

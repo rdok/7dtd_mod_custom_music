@@ -18,7 +18,7 @@ namespace CustomMusic.Harmony
         private static int currentTrackIndex = -1;
         private static int previousTrackIndex = -1;
         private static float lastVolumeSetting = -1f;
-        private static float customMusicVolume = 1.0f; // Base volume control for custom music
+        private static readonly float customMusicVolume = 1.0f; // Base volume control for custom music
         private static readonly System.Random random = new System.Random();
 
         public static bool Prefix(Conductor __instance)
@@ -93,27 +93,40 @@ namespace CustomMusic.Harmony
 
         public static void UpdateVolume()
         {
-            if (!GameManager.Instance.masterAudioMixer.GetFloat("dmsVol", out var masterVolume))
+            if (!GameManager.Instance.masterAudioMixer.GetFloat("dmsVol", out var dynamicMusicVolume))
             {
                 Logger.Error("CustomMusicPlayer: Failed to retrieve 'dmsVol' from masterAudioMixer.");
                 return;
             }
 
-            var linearVolumeFromDecibel = Mathf.Pow(10, masterVolume / 20);
-            var adjustedVolumeToGameMasterVolume = customMusicVolume * linearVolumeFromDecibel;
+            // Retrieve and cap the master volume at 1f
+            var masterVolume = Mathf.Min(GamePrefs.GetFloat(EnumGamePrefs.OptionsOverallAudioVolumeLevel), 1f);
 
-            if (Math.Abs(adjustedVolumeToGameMasterVolume - lastVolumeSetting) <= 0.01f)
+            // Convert dynamic music volume from decibels to linear scale
+            var linearDynamicMusicVolume = Mathf.Pow(10, dynamicMusicVolume / 20);
+
+            // Calculate the final volume by multiplying the linear dynamic music volume with the master volume
+            var finalVolume = customMusicVolume * linearDynamicMusicVolume * masterVolume;
+
+            // Log the volume values for debugging
+            Logger.Info($"CustomMusicPlayer: Linear dynamic music volume: {linearDynamicMusicVolume}");
+            Logger.Info($"CustomMusicPlayer: Linear master volume (capped at 1f): {masterVolume}");
+            Logger.Info($"CustomMusicPlayer: Final volume (linear scale): {finalVolume}");
+
+            // Check if the volume needs to be updated
+            if (audioFile != null && Math.Abs(finalVolume - lastVolumeSetting) > 0.01f)
             {
-                return;
-            }
+                audioFile.Volume = finalVolume;
+                Logger.Info($"CustomMusicPlayer: Volume applied: {finalVolume}");
 
-            if (audioFile != null)
+                lastVolumeSetting = finalVolume;
+                Logger.Info($"CustomMusicPlayer: Volume successfully updated to {finalVolume * 100}%.");
+            }
+            else
             {
-                audioFile.Volume = adjustedVolumeToGameMasterVolume; 
+                Logger.Info(
+                    $"CustomMusicPlayer: No significant volume change detected. Current volume: {lastVolumeSetting * 100}%");
             }
-
-            lastVolumeSetting = adjustedVolumeToGameMasterVolume;
-            Logger.Info($"CustomMusicPlayer: Volume successfully updated to {adjustedVolumeToGameMasterVolume * 100}%.");
         }
     }
 }
