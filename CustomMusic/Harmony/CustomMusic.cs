@@ -1,7 +1,9 @@
-﻿using System.IO;
-using DynamicMusic;
-using HarmonyLib;
+﻿using System;
+using System.IO;
 using NAudio.Wave;
+using HarmonyLib;
+using DynamicMusic;
+using UnityEngine;
 
 namespace CustomMusic.Harmony
 {
@@ -12,6 +14,7 @@ namespace CustomMusic.Harmony
         private static WaveOutEvent outputDevice;
         private static AudioFileReader audioFile;
         private static int currentTrackIndex = 0;
+        private static float lastVolumeSetting = -1f;
 
         public static bool Prefix(Conductor __instance)
         {
@@ -37,6 +40,9 @@ namespace CustomMusic.Harmony
                 PlayNextTrack(customTracks);
             }
 
+            // Update the volume according to the game's settings
+            UpdateVolume();
+
             Logger.Info("CustomMusicPlayer: Completed Update function override.");
             return false;
         }
@@ -60,6 +66,30 @@ namespace CustomMusic.Harmony
             Logger.Info($"CustomMusicPlayer: Next track index set to {currentTrackIndex}.");
         }
 
+        private static void UpdateVolume()
+        {
+            // Access the game's current music volume using the "dmsVol" parameter
+            if (GameManager.Instance.masterAudioMixer.GetFloat("dmsVol", out float volume))
+            {
+                float currentVolumeSetting = Mathf.Pow(10, volume / 20);
+
+                if (Math.Abs(currentVolumeSetting - lastVolumeSetting) > 0.01f)
+                {
+                    outputDevice.Volume = currentVolumeSetting;
+                    lastVolumeSetting = currentVolumeSetting;
+                    Logger.Info($"CustomMusicPlayer: Volume successfully updated to {currentVolumeSetting * 100}%.");
+                }
+                else
+                {
+                    Logger.Info("CustomMusicPlayer: Volume has not changed since the last update.");
+                }
+            }
+            else
+            {
+                Logger.Error("CustomMusicPlayer: Failed to retrieve 'dmsVol' from masterAudioMixer.");
+            }
+        }
+
         public static void Cleanup()
         {
             Logger.Info("CustomMusicPlayer: Cleaning up resources.");
@@ -74,6 +104,26 @@ namespace CustomMusic.Harmony
             {
                 outputDevice.Dispose();
                 Logger.Info("CustomMusicPlayer: Disposed of WaveOutEvent.");
+            }
+        }
+
+        [HarmonyPatch(typeof(Conductor), nameof(Conductor.OnPauseGame))]
+        public static class NoPauseOnGamePause
+        {
+            public static bool Prefix()
+            {
+                Logger.Info("NoPauseOnGamePause: Preventing music from pausing.");
+                return false;
+            }
+        }
+
+        [HarmonyPatch(typeof(Conductor), nameof(Conductor.OnUnPauseGame))]
+        public static class NoPauseOnGameUnPause
+        {
+            public static bool Prefix()
+            {
+                Logger.Info("NoPauseOnGameUnPause: Preventing music from unpausing.");
+                return false;
             }
         }
     }
