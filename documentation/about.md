@@ -1,7 +1,7 @@
 # 7 Days to Die Mod - No Combat Music
 [![nexus-mods-collection-immersive-hud](https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla)](https://next.nexusmods.com/7daystodie/collections/epfqzi) [![nexus-mods-page](https://img.shields.io/badge/Nexus%20Mod-Custom%20Music%20-orange?style=flat-square&logo=spinrilla)](https://www.nexusmods.com/7daystodie/mods/6035) [![github-repository](https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github)](https://github.com/rdok/7dtd_mod_custom_music)
 
-> **Custom Music:** Replace the dynamic music with your own music. mp3, wav, and aiff.
+> **Custom Music:** Replace the dynamic music with your own music. mp3, wav, flac, and aiff.
 > **EAC:** This mod uses custom code that is not compatible with Easy Anti-Cheat (EAC).
 
 [![Showcase](https://github.com/rdok/7dtd_mod_custom_music/blob/main/documentation/showcase.jpg?raw=true)](https://www.nexusmods.com/7daystodie/mods/6035)
@@ -14,19 +14,19 @@
 - Ambient music such as crickets sound are NOT overriden.
 - Includes two free tracks (Creative Commons). See credits section.
   - [YouTube Showcase](https://www.nexusmods.com/7daystodie/mods/6035?tab=videos#lg=2&slide=0) 
-- Supports mp3, wav; and aiff, although the latter hasn't been tested.
+- Supports mp3, wav, flac and aiff.
   - The two included tracks are in mp3 & wav formats
 - Plays tracks in random, and ensures no two tracks are played in the same order.
 
 ## User Resources
-- To add custom tracks to your game, you can use [youtube-dl](https://github.com/ytdl-org/youtube-dl), a command-line program that allows you to download videos from YouTube.com and other video sites in mp3 format. This tool is legal to use for non-infringing purposes, such as downloading & converting public domain music or tracks you have purchased the rights to.
+- To add custom tracks to your game, you can use ~~[youtube-dl](https://github.com/ytdl-org/youtube-dl)~~, [yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp), a command-line program that allows you to download videos from YouTube.com and other video sites in mp3 format. This tool is legal to use for non-infringing purposes, such as downloading & converting public domain music or tracks you have purchased the rights to.
   - For more information on the Digital Millennium Copyright Act (DMCA) and GitHub's response, see: [Standing up for developers: youtube-dl is back](https://github.blog/news-insights/policy-news-and-insights/standing-up-for-developers-youtube-dl-is-back/).
 - I recommend adding music that isn't intense; although for the average player this is not an issue, for players like me who play multiple hours per day, playing consistent intense music quickly becomes tiring/annoying. I have found that ambient music similar to the style of *Red Dead Redemption 2*'s soundtrack provides a more relaxing experience.
   - You might want to explore tracks from the [RDR2 ambient music playlist](https://www.youtube.com/playlist?list=PLeZn0JLtzRu2hHLf8EWbWkaZFWeCp3wrf). These tracks provide lots of breathing room and can be listened to for hundreds of hours without causing listener fatigue.
 - I also recommend using this mod together with [Phantom Silence](https://www.nexusmods.com/7daystodie/mods/5749) mod, or any other that disable the creep ambient noises during nighttime and day-night transition cues. 
   
 ## Backlog
-- Lower a bit the music level; even on 13% it's sounds a bit high.
+- Normalise the music tracks volume; some tracks have incredible high volume, and others quite low. Normalise these to the dynamic volume.
 - Apply fade in/out effects when changing tracks.
 - Daily Time Allotted; currently this mod plays music constantly. Not a big issue when having lots of music tracks. Regardless, I still want this feature to replicate the RDR2 behaviour/default game behaviour; having that quite in between music tracks adds to the atmosphere, gives a bit of breathing room for the next music track.
 - Long tracks; if the track to be played is longer than 7 minutes have the music player play from a random location instead from the start.
@@ -59,5 +59,5 @@
 - feat: Supports changing volume.
 - feat: Ambient music such as crickets sound are NOT overriden.
 - feat: Add two free tracks (Creative Commons).
-- feat: Supports mp3 & wav; as well as aiff.
+- feat: Supports mp3 & wav; flac and aiff.
 - feat: Plays tracks in random, and ensures no two tracks are played in the same order.

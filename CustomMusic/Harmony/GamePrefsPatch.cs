@@ -15,7 +15,7 @@ namespace CustomMusic.Harmony
         [HarmonyPatch(nameof(GamePrefs.Save), new Type[] { typeof(string), typeof(List<EnumGamePrefs>) })]
         public static void Postfix()
         {
-            Logger.Info("GamePrefsPatch: Postfix executed after Save.");
+            Logger.Debug("GamePrefsPatch: Postfix executed after Save.");
 
             var isEnabled = GamePrefs.GetBool(EnumGamePrefs.OptionsDynamicMusicEnabled);
 

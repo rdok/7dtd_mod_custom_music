@@ -15,7 +15,7 @@ namespace CustomMusic.Harmony
 
         public static bool Prefix()
         {
-            Logger.Info("CustomMusicPlayerInit: Starting Init function override.");
+            Logger.Debug("CustomMusicPlayerInit: Starting Init function override.");
 
             var modPath = Assembly.GetExecutingAssembly().Location;
             var modDirectory = Path.GetDirectoryName(modPath);
@@ -25,7 +25,7 @@ namespace CustomMusic.Harmony
             var musicDirectory = Path
                 .Combine(modDirectory ?? throw missingModPathError, "AmbientTracks");
 
-            Logger.Info(
+            Logger.Debug(
                 "CustomMusicPlayerInit: Checking for music directory at " +
                 $"{musicDirectory}.");
 
@@ -37,19 +37,19 @@ namespace CustomMusic.Harmony
                     .Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase))
                 ).ToArray();
 
-            Logger.Info("CustomMusicPlayerInit: Found "
+            Logger.Debug("CustomMusicPlayerInit: Found "
                         + $"{_tracks.Length} supported audio files in "
                         + $"{musicDirectory}.");
 
             if (_tracks.Length == 0)
             {
-                Logger.Info(
+                Logger.Debug(
                     $"CustomMusicPlayerInit: No supported audio files found in {musicDirectory}. " +
                     "Please add audio files to this directory.");
                 return false;
             }
 
-            Logger.Info("CustomMusicPlayerInit: Custom Music Player Initialized.");
+            Logger.Debug("CustomMusicPlayerInit: Custom Music Player Initialized.");
             return false;
         }
 

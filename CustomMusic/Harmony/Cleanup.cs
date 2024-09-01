@@ -10,19 +10,19 @@ namespace CustomMusic.Harmony
 
         public static void Prefix()
         {
-            Logger.Info("CustomMusicPlayerCleanup: Cleaning up resources.");
+            Logger.Debug("CustomMusicPlayerCleanup: Cleaning up resources.");
 
             if (MusicPlayer.audioFile != null)
             {
                 MusicPlayer.audioFile.Dispose();
-                Logger.Info("CustomMusicPlayerCleanup: Disposed of AudioFileReader.");
+                Logger.Debug("CustomMusicPlayerCleanup: Disposed of AudioFileReader.");
             }
             
             if (MusicPlayer.outputDevice == null) return;
             
             MusicPlayer.outputDevice.Dispose();
             
-            Logger.Info("CustomMusicPlayerCleanup: Disposed of WaveOutEvent.");
+            Logger.Debug("CustomMusicPlayerCleanup: Disposed of WaveOutEvent.");
         }
     }
 }

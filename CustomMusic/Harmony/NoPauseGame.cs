@@ -10,7 +10,7 @@ namespace CustomMusic.Harmony
 
         public static bool Prefix()
         {
-            Logger.Info("NoPauseOnGamePause: Preventing music from pausing.");
+            Logger.Debug("NoPauseOnGamePause: Preventing music from pausing.");
             return false;
         }
     }
@@ -22,7 +22,7 @@ namespace CustomMusic.Harmony
 
         public static bool Prefix()
         {
-            Logger.Info("NoPauseOnGameUnPause: Preventing music from unpausing.");
+            Logger.Debug("NoPauseOnGameUnPause: Preventing music from unpausing.");
             return false;
         }
     }
