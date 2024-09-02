@@ -31,7 +31,7 @@
 - Daily Time Allotted; currently this mod plays music constantly. Not a big issue when having lots of music tracks. Regardless, I still want this feature to replicate the RDR2 behaviour/default game behaviour; having that quite in between music tracks adds to the atmosphere, gives a bit of breathing room for the next music track.
 - Long tracks; if the track to be played is longer than 7 minutes have the music player play from a random location instead from the start.
 - Although I'm against combat music, when listening to legendary Doom music while in combat I can't deny it's worth it. Note to myself: try to make it non-immersion breaking by changing when it stops; e.g. delay stopping the music after killing the last enemy by a few random seconds; in order to not give a queue to the player that no remaining enemies are left.
-- Break this to two mods. The music player, and another mod which just loads the tracks to play; this should mitigate any issues from having the custom tracks removed after an update.
+- Break this to two mods. The music player, and another mod which contains a wider list of music tracks that can be freely used with Creative Commons License.
 
 ## Required Music Attribution
 
