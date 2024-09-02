@@ -35,15 +35,22 @@
 
 ## Required Music Attribution
 
-### "Cast Aside" by Hayden Folke
-> Track description:  Wonderful cinematic western music by Hayden Folker. This royalty free music is available under Creative Commons License — CC BY 3.0  and you can use it for your videos (even monetized) for free if you credit Hayden Folker  in your video description. MP3 (320 kbps) and WAV (44.1 kHz 16 bit, stereo) audio formats are available for free download. The track has a duration of 2 minutes and 37 seconds, with a tempo of 95 BPM.
-- Source: Free Stock Music - free-stock-music.com/hayden-folker-the-red-desert.html
-- Artist's Website: soundcloud.com/hayden-folker
+> **Track Title:** Cast Aside  
+> **Artist:** Hayden Folker | https://soundcloud.com/hayden-folker  
+> **Music Promoted By:** https://www.free-stock-music.com  
+> **License:** Creative Commons / Attribution 3.0 Unported License (CC BY 3.0)  
+> **License Link:** https://creativecommons.org/licenses/by/3.0/deed.en_US  
+> **Track Link:** https://www.free-stock-music.com/hayden-folker-cast-aside.html
+> **Description:** Wonderful cinematic western music by Hayden Folker. This royalty-free music is available under the Creative Commons License — CC BY 3.0, and you can use it for your videos (even monetized) for free if you credit Hayden Folker in your video description. The track has a duration of 2 minutes and 37 seconds, with a tempo of 95 BPM. MP3 (320 kbps) and WAV (44.1 kHz 16 bit, stereo) audio formats are available for free download.
+ 
 
-### "The Red Desert" by Hayden Folke
-> Track description:  Superb suspenseful cinematic music by Hayden Folker. “The Red Desert” is available under Creative Commons License — CC BY 3.0  and you can use it for your videos (even monetized) for free if you credit Hayden Folker  in your video description. MP3 and WAV audio formats are available for free download. The track’s length is 01:20.
-- Source: Free Stock Music - free-stock-music.com/hayden-folker-the-red-desert.html
-- Artist's Website: soundcloud.com/hayden-folker
+> **Track Title:** The Red Desert
+> **Artist:** Hayden Folker | https://soundcloud.com/hayden-folker  
+> **Music Promoted By:** https://www.free-stock-music.com  
+> **License:** Creative Commons / Attribution 3.0 Unported License (CC BY 3.0)  
+> **License Link:** https://creativecommons.org/licenses/by/3.0/deed.en_US  
+> **Track Link:** https://www.free-stock-music.com/hayden-folker-the-red-desert.html
+> **Description:** Superb suspenseful cinematic music by Hayden Folker. “The Red Desert” is available under Creative Commons License — CC BY 3.0  and you can use it for your videos (even monetized) for free if you credit Hayden Folker  in your video description. MP3 and WAV audio formats are available for free download. The track’s length is 01:20.
 
 ## Software Attribution
 - To play the audio tracks this mod uses [naudio/NAudio](https://github.com/naudio/NAudio), an Audio and MIDI library for .NET. As of the version [2.2.1](https://github.com/naudio/NAudio/releases/tag/v2.2.1) this library can be used under MIT License. The MIT License is a permissive open-source license that allows software to be freely used, modified, distributed, and used for commercial purposes.
