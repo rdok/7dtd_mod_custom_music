@@ -1,67 +1,59 @@
-﻿using System;
+﻿using NAudio.Wave;
 using System.IO;
-using NAudio.Wave;
-using HarmonyLib;
 using DynamicMusic;
-using UnityEngine;
+using HarmonyLib;
 
 namespace CustomMusic.Harmony
 {
     [HarmonyPatch(typeof(Conductor), nameof(Conductor.Update))]
     public static class MusicPlayer
     {
-        public static bool IsCustomMusicEnabled { get; set; } = true;
-
         private static readonly ILogger Logger = new Logger();
-        public static WaveOutEvent outputDevice;
-        public static AudioFileReader audioFile;
-        private static int currentTrackIndex = -1;
-        private static int previousTrackIndex = -1;
-        private static readonly System.Random random = new System.Random();
+        public static WaveOutEvent OutputDevice;
+        private static int _currentTrackIndex = -1;
+        private static int _previousTrackIndex = -1;
+        private static readonly System.Random Random = new System.Random();
+        private static readonly VolumeAdjuster VolumeAdjuster = new VolumeAdjuster();
+        public static bool IsMusicEnabled { get; set; } = true;
+        private static AudioFileReader _audioFileReader;
 
         public static bool Prefix(Conductor __instance)
         {
-            if (!IsCustomMusicEnabled)
+            if (!IsMusicEnabled)
             {
                 StopMusic();
-                Logger.Debug("Custom music is disabled. Skipping custom music playback.");
-                return false; // Allow the original Update method to proceed
+                Logger.Debug("Dynamic music is disabled. Skipping custom music playback.");
+                return false;
             }
 
             var customTracks = LoadTracks.GetCustomTracks();
             if (customTracks == null || customTracks.Length == 0)
             {
                 Logger.Debug("No custom music loaded, skipping Update.");
-                return false; // Allow the original Update method to proceed if no tracks are available
+                return false;
             }
 
-            if (outputDevice == null)
+            if (OutputDevice == null)
             {
-                outputDevice = new WaveOutEvent();
+                OutputDevice = new WaveOutEvent();
                 Logger.Debug("Initialized WaveOutEvent output device.");
             }
 
-            if (outputDevice.PlaybackState != PlaybackState.Playing)
-            {
-                Logger.Debug("No music currently playing, starting next track.");
-                PlayRandomTrack(customTracks);
-            }
+            if (OutputDevice.PlaybackState == PlaybackState.Playing) return false;
 
-            return false; // Skip the original Update method since we've handled music playback
+            Logger.Debug("No music currently playing, starting next track.");
+
+            PlayRandomTrack(customTracks);
+
+            return false;
         }
 
         private static void StopMusic()
         {
-            if (audioFile != null)
-            {
-                audioFile.Dispose();
-                audioFile = null;
-                Logger.Debug("Stopped and disposed of custom music.");
-            }
+            if (OutputDevice == null) return;
 
-            if (outputDevice == null) return;
+            OutputDevice.Stop();
 
-            outputDevice.Stop();
             Logger.Debug("Stopped output device.");
         }
 
@@ -69,58 +61,18 @@ namespace CustomMusic.Harmony
         {
             do
             {
-                currentTrackIndex = random.Next(customTracks.Length);
-            } while (currentTrackIndex == previousTrackIndex && customTracks.Length > 1);
+                _currentTrackIndex = Random.Next(customTracks.Length);
+            } while (_currentTrackIndex == _previousTrackIndex && customTracks.Length > 1);
 
-            Logger.Debug($"Selected track {currentTrackIndex + 1} of {customTracks.Length}.");
+            Logger.Debug($"Selected track {_currentTrackIndex + 1} of {customTracks.Length}.");
 
-            if (audioFile != null)
-            {
-                audioFile.Dispose();
-                Logger.Debug("Disposed of previous AudioFileReader.");
-            }
+            _audioFileReader = new AudioFileReader(customTracks[_currentTrackIndex]);
+            VolumeAdjuster.Adjust(_audioFileReader);
+            OutputDevice.Init(_audioFileReader);
+            OutputDevice.Play();
+            Logger.Info($"Started playing {Path.GetFileName(customTracks[_currentTrackIndex])}.");
 
-            audioFile = new AudioFileReader(customTracks[currentTrackIndex]);
-            outputDevice.Init(audioFile);
-            UpdateVolume(); // Adjust volume immediately based on game master volume
-            outputDevice.Play();
-            Logger.Info($"Started playing {Path.GetFileName(customTracks[currentTrackIndex])}.");
-
-            previousTrackIndex = currentTrackIndex;
+            _previousTrackIndex = _currentTrackIndex;
         }
-
-        public static void UpdateVolume()
-        {
-            if (!GameManager.Instance.masterAudioMixer.GetFloat("dmsVol", out var dynamicMusicVolume))
-            {
-                Logger.Error("Failed to retrieve 'dmsVol' from masterAudioMixer.");
-                return;
-            }
-
-            // Retrieve and cap the master volume at 1f
-            var masterVolume = Mathf.Min(GamePrefs.GetFloat(EnumGamePrefs.OptionsOverallAudioVolumeLevel), 1f);
-
-            // Convert dynamic music volume from decibels to linear scale
-            var linearDynamicMusicVolume = Mathf.Pow(10, dynamicMusicVolume / 20);
-
-            // Calculate the final volume by multiplying the linear dynamic music volume with the master volume
-            var finalVolume = linearDynamicMusicVolume * masterVolume;
-
-            // Log the volume values for debugging
-            Logger.Debug($"Dynamic music volume (in decibels): {dynamicMusicVolume}");
-            Logger.Debug($"Linear dynamic music volume: {linearDynamicMusicVolume}");
-            Logger.Debug($"Master volume (capped at 1f): {masterVolume}");
-            Logger.Debug($"Final volume (linear scale): {finalVolume}");
-
-            // Immediately apply the volume without interpolation
-            if (audioFile != null)
-            {
-                audioFile.Volume = finalVolume;
-                Logger.Debug($"Volume applied immediately: {finalVolume}");
-
-                Logger.Debug($"Volume successfully updated to {finalVolume * 100}%.");
-            }
-        }
-
     }
 }
