@@ -102,7 +102,7 @@ namespace CustomMusic.Harmony.Patch
             if(VolumeAdjuster == null) VolumeAdjuster = Services.Get<IVolumeAdjuster>();
             VolumeAdjuster.Adjust(masterAudioMixer, _audioFileReader, preCalculatedMaxDecibel);
 
-            Logger.Info("Volume successfully updated for the currently playing track.");
+            Logger.Debug("Volume successfully updated for the currently playing track.");
         }
     }
 }
