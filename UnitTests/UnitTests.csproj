@@ -36,13 +36,13 @@
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="0Harmony, Version=2.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\7dtd_nuget.1.0.2\lib\net48\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
+          <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\7dtd_nuget.1.0.2\lib\net48\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
+          <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
         </Reference>
         <Reference Include="LogLibrary, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\7dtd_nuget.1.0.2\lib\net48\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
+          <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
         </Reference>
         <Reference Include="Moq, Version=4.20.70.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
             <HintPath>..\packages\Moq.4.20.70\lib\net462\Moq.dll</HintPath>
@@ -69,8 +69,11 @@
         <Reference Include="NAudio.WinMM, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
             <HintPath>..\packages\NAudio.WinMM.2.2.1\lib\netstandard2.0\NAudio.WinMM.dll</HintPath>
         </Reference>
+        <Reference Include="netstandard, Version=2.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+          <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\netstandard.dll</HintPath>
+        </Reference>
         <Reference Include="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-          <HintPath>..\packages\7dtd_nuget.1.0.2\lib\net48\7DaysToDie_Data\Managed\System.dll</HintPath>
+          <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\System.dll</HintPath>
         </Reference>
         <Reference Include="System.Configuration"/>
         <Reference Include="System.Core"/>
@@ -95,10 +98,10 @@
           <HintPath>..\packages\Unity.5.11.10\lib\net48\Unity.Container.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\7dtd_nuget.1.0.2\lib\net48\7DaysToDie_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+          <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\7dtd_nuget.1.0.2\lib\net48\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+          <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>

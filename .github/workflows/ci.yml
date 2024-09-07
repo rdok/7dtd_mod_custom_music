@@ -15,16 +15,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        
+      - name: Add NuGet private feed
+        run: |
+          nuget sources Add -Name "GitHubPackages" \
+            -Source "https://nuget.pkg.github.com/rdok/index.json" \
+            -Username "rdok" -Password "${{ secrets.NUGET_API_KEY }}"
 
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      - name: Add NuGet private feed
-        run: |
-          nuget sources Add -Name "GitHubPackages" -Source "https://nuget.pkg.github.com/rdok/index.json" -Username "rdok" -Password "${{ secrets.NUGET_API_KEY }}"
-
       - name: Build the solution
-        run: msbuild -t:build -restore -p:RestorePackagesConfig=true CustomMusic.sln
+        run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=Debug CustomMusic.sln
 
       - name: List build output
         run: |
