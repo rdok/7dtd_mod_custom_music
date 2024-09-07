@@ -16,14 +16,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Restore NuGet dependencies
-        env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Add NuGet private feed
         run: |
-          dotnet restore UnitTests/UnitTests.csproj --configfile nuget.config
+          nuget sources Add -Name "GitHubPackages" -Source "https://nuget.pkg.github.com/rdok/index.json" -Username "rdok" -Password "${{ secrets.NUGET_API_KEY }}"
 
       - name: Build the solution
-        run: msbuild UnitTests/UnitTests.csproj -property:Configuration=Debug
+        run: msbuild -t:build -restore -p:RestorePackagesConfig=true CustomMusic.sln
 
       - name: List build output
         run: |

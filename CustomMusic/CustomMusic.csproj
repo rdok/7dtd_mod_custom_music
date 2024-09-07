@@ -75,7 +75,7 @@
         <Content Include="ModInfo.xml">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <Reference Include="0Harmony, Version=2.13.0.0, Culture=neutral, processorArchitecture=MSIL">
+        <Reference Include="0Harmony, Version=2.13.0.0, Culture=neutral, processorArchitecture=MSIL"> 
           <HintPath>..\packages\7dtd_nuget.1.0.2\lib\net48\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
