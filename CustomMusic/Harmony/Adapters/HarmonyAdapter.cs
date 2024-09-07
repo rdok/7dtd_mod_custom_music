@@ -2,13 +2,13 @@ using System;
 
 namespace CustomMusic.Harmony.Adapters
 {
-    public interface IHarmony
+    public interface IHarmonyAdapter
     {
         void PatchAll();
         void Init(string id);
     }
 
-    public class Harmony : IHarmony
+    public class HarmonyAdapter : IHarmonyAdapter
     {
         private HarmonyLib.Harmony _harmony;
 

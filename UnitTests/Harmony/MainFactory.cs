@@ -8,9 +8,9 @@ namespace UnitTests.Harmony
 {
     public static class MainFactory
     {
-        public static (Main main, Mock<IHarmony> harmonyMock, Mod) Create()
+        public static (Main main, Mock<IHarmonyAdapter> harmonyMock, Mod) Create()
         {
-            var harmonyMock = new Mock<IHarmony>();
+            var harmonyMock = new Mock<IHarmonyAdapter>();
             var main = new Main();
             var mod = new Mod();
             Services.Add(_ => harmonyMock.Object);

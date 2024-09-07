@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CustomMusic.Harmony.Adapters;
+using CustomMusic.Harmony.Volume;
 
 namespace CustomMusic.Harmony
 {
@@ -14,7 +15,7 @@ namespace CustomMusic.Harmony
             Database[typeof(TService)] = provider;
         }
 
-        public static TService Resolve<TService>(params object[] args)
+        public static TService Get<TService>(params object[] args)
         {
             if (Database.TryGetValue(typeof(TService), out var provider))
             {
@@ -26,7 +27,10 @@ namespace CustomMusic.Harmony
 
         public static void Initialise()
         {
-            Add<IHarmony>((args) => new Adapters.Harmony());
+            var logger = new Logger();
+            
+            Add<IHarmonyAdapter>(args => new HarmonyAdapter());
+            Add<IVolumeAnalyzer>(args => new VolumeAnalyzer(logger));
         }
     }
 }
