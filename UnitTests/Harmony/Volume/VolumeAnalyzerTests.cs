@@ -10,10 +10,9 @@ namespace UnitTests.Harmony.Volume
         [Test]
         public void it_handles_tracks_with_no_valid_samples()
         {
-            var (volumeAnalyzer, audioFileReaderMock) = VolumeAnalyzerFactory.Create(
-                new Dictionary<string, object>
+            var (volumeAnalyzer, audioFileReaderMock) = VolumeAnalyzerFactory.Create(new Dictionary<string, object>
                 {
-                    { "NumberOfSamplesRead", new[] { 0f } }
+                    { "NumberOfSamplesRead", new[] { new[] { 0f } } }
                 }
             );
 
@@ -22,14 +21,13 @@ namespace UnitTests.Harmony.Volume
             Assert.AreEqual(float.NegativeInfinity, output);
         }
 
-
         [Test]
         public void it_finds_the_largest_amplitude_from_two_samples()
         {
             var (volumeAnalyzer, audioFileReaderMock) = VolumeAnalyzerFactory.Create(
                 new Dictionary<string, object>
                 {
-                    { "NumberOfSamplesRead", new[] { 2f, 3f } }
+                    { "NumberOfSamplesRead", new[] { new[] { 2f, 3f } } }
                 }
             );
 
@@ -44,7 +42,7 @@ namespace UnitTests.Harmony.Volume
             var (volumeAnalyzer, audioFileReaderMock) = VolumeAnalyzerFactory.Create(
                 new Dictionary<string, object>
                 {
-                    { "NumberOfSamplesRead", new[] { -3f, -2f } }
+                    { "NumberOfSamplesRead", new[] { new[] { -3f, -2f } } }
                 }
             );
 
@@ -56,10 +54,9 @@ namespace UnitTests.Harmony.Volume
         [Test]
         public void it_finds_the_largest_amplitude_with_zeros_and_non_zeros()
         {
-            var (volumeAnalyzer, audioFileReaderMock) = VolumeAnalyzerFactory.Create(
-                new Dictionary<string, object>
+            var (volumeAnalyzer, audioFileReaderMock) = VolumeAnalyzerFactory.Create(new Dictionary<string, object>
                 {
-                    { "NumberOfSamplesRead", new[] { 0f, 5f, 0f } }
+                    { "NumberOfSamplesRead", new[] { new[] { 0f, 5f, 0f } } }
                 }
             );
 
@@ -74,7 +71,7 @@ namespace UnitTests.Harmony.Volume
             var (volumeAnalyzer, audioFileReaderMock) = VolumeAnalyzerFactory.Create(
                 new Dictionary<string, object>
                 {
-                    { "NumberOfSamplesRead", new[] { 4f, 4f, 4f } }
+                    { "NumberOfSamplesRead", new[] { new[] { 4f, 4f, 4f } } }
                 }
             );
 

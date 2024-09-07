@@ -23,7 +23,7 @@ namespace CustomMusic.Harmony.Volume
 
             while ((samplesRead = audioFileReader.Read(sampleBuffer, 0, sampleBuffer.Length)) > 0)
             {
-                 var chunkMaxAmplitude = sampleBuffer.Take(samplesRead).AsParallel().Select(Mathf.Abs).Max();
+                var chunkMaxAmplitude = sampleBuffer.Take(samplesRead).AsParallel().Select(Mathf.Abs).Max();
                 maxAmplitude = Mathf.Max(maxAmplitude, chunkMaxAmplitude);
             }
 
