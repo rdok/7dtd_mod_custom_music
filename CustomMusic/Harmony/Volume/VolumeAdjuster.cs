@@ -24,7 +24,7 @@ namespace CustomMusic.Harmony.Volume
                 return;
             }
 
-            _logger.Debug($"Dynamic music volume (in decibels): {dynamicMusicVolumeInDecibels}");
+            _logger.Debug($"Dynamic music volume (in decibels): {dynamicMusicVolumeInDecibels} dB");
 
             if (float.IsNegativeInfinity(preCalculatedMaxDecibel))
             {
@@ -38,10 +38,28 @@ namespace CustomMusic.Harmony.Volume
             _logger.Debug($"Decibel difference: {decibelDifference} dB");
 
             var adjustmentFactor = Mathf.Pow(10, decibelDifference / 20);
-            _logger.Debug($"Adjustment factor (linear scale): {adjustmentFactor}");
+
+            // Log adjustment factor as percentage
+            var adjustmentPercentage = adjustmentFactor * 100;
+            _logger.Debug($"Adjustment factor: {adjustmentPercentage:F2}%");
+
+            var filledBars = Mathf.Clamp((int)(adjustmentPercentage / 10), 0, 10);
+            string adjustmentBar;
+
+            if (adjustmentPercentage > 100)
+            {
+                var overflowBars = Mathf.Clamp((int)((adjustmentPercentage - 100) / 10), 0, 10);
+                adjustmentBar = new string('|', 10) + new string('+', overflowBars);
+            }
+            else
+            {
+                adjustmentBar = new string('|', filledBars).PadRight(10, '.');
+            }
+
+            _logger.Debug($"Adjustment bar: [{adjustmentBar}]");
 
             audioFileReader.Volume = adjustmentFactor;
-            _logger.Debug($"Final volume applied: {audioFileReader.Volume}");
+            _logger.Debug($"Final volume applied: {audioFileReader.Volume:F2}");
         }
     }
 }
