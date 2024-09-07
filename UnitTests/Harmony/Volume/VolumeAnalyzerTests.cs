@@ -37,7 +37,7 @@ namespace UnitTests.Harmony.Volume
 
             Assert.AreEqual(20 * Mathf.Log10(3f), output);
         }
-        
+
         [Test]
         public void it_handles_negative_samples()
         {
@@ -50,7 +50,7 @@ namespace UnitTests.Harmony.Volume
 
             var output = volumeAnalyzer.FindMaxDecibel(audioFileReaderMock.Object);
 
-            Assert.AreEqual(20 * Mathf.Log10(3f), output); 
+            Assert.AreEqual(20 * Mathf.Log10(3f), output);
         }
 
         [Test]
@@ -80,7 +80,20 @@ namespace UnitTests.Harmony.Volume
 
             var output = volumeAnalyzer.FindMaxDecibel(audioFileReaderMock.Object);
 
-            Assert.AreEqual(20 * Mathf.Log10(4f), output); 
+            Assert.AreEqual(20 * Mathf.Log10(4f), output);
+        }
+
+        [Test]
+        public void it_finds_the_largest_amplitude_across_multiple_chunks()
+        {
+            var (volumeAnalyzer, audioFileReaderMock) = VolumeAnalyzerFactory.Create(new Dictionary<string, object>
+            {
+                { "NumberOfSamplesRead", new[] { new[] { 10f, 3f }, new[] { 5f, 1f } } }
+            });
+
+            var output = volumeAnalyzer.FindMaxDecibel(audioFileReaderMock.Object);
+
+            Assert.AreEqual(20 * Mathf.Log10(10f), output);
         }
     }
 }
