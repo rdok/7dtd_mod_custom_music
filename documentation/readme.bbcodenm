@@ -11,36 +11,28 @@
 [list]
 [*] [b]Overrides music for all game scenarios[/b]:
 [list]
-[*] Exploration, Suspense, Combat, Bloodmoon, HomeDay, HomeNight, and Trader interactions (TraderBob, TraderHugh, TraderJen, TraderJoel, TraderRekt).
-[/list]
+[*] Exploration, Suspense, Combat, Bloodmoon, HomeDay, HomeNight, and Trader interactions (TraderBob, TraderHugh, TraderJen, TraderJoel, TraderRekt).[/list]
 [*] [b]Music continues when the game is paused[/b]:
 [list]
-[*] The music does [b]NOT[/b] pause when you pause the game.
-[/list]
+[*] The music does [b]NOT[/b] pause when you pause the game.[/list]
 [*] [b]Supports volume control[/b]:
 [list]
-[*] Automatically adjusts the volume of each track by matching its loudest point (max decibels) to the game's dynamic music volume level.
-[/list]
+[*] Automatically adjusts the volume of each track by matching its loudest point (max decibels) to the game's dynamic music volume level.[/list]
 [*] [b]Ambient sounds remain unaffected[/b]:
 [list]
-[*] Ambient sounds, like crickets, are [b]NOT[/b] overridden.
-[/list]
+[*] Ambient sounds, like crickets, are [b]NOT[/b] overridden.[/list]
 [*] [b]Includes two free tracks[/b]:
 [list]
 [*] Both are Creative Commons licensed. See the [b]Credits[/b] section for more info.
 [*] [url=https://www.nexusmods.com/7daystodie/mods/6035?tab=videos#lg=2&slide=0]YouTube Showcase[/url]
-[*] The included tracks are in mp3 and wav formats.
-[/list]
+[*] The included tracks are in mp3 and wav formats.[/list]
 [*] [b]Supported file formats[/b]:
 [list]
-[*] mp3, wav, flac, and aiff.
-[/list]
+[*] mp3, wav, flac, and aiff.[/list]
 [*] [b]Randomized track playback[/b]:
 [list]
 [*] No two tracks play in the same order during a game session.
 [/list][/list]
-
-
 [size=5]User Resources[/size]
 [list]
 [*] To add custom tracks to your game, you can use [s][url=https://github.com/ytdl-org/youtube-dl]youtube-dl[/url][/s], [url=https://github.com/yt-dlp/yt-dlp]yt-dlp/yt-dlp[/url], a command-line program that allows you to download videos from YouTube.com and other video sites in mp3 format. This tool is legal to use for non-infringing purposes, such as downloading & converting public domain music or tracks you have purchased the rights to.
