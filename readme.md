@@ -11,28 +11,20 @@
 
 - **Overrides music for all game scenarios**:
   - Exploration, Suspense, Combat, Bloodmoon, HomeDay, HomeNight, and Trader interactions (TraderBob, TraderHugh, TraderJen, TraderJoel, TraderRekt).
-
 - **Music continues when the game is paused**:
   - The music does **NOT** pause when you pause the game.
-
 - **Supports volume control**:
   - Automatically adjusts the volume of each track by matching its loudest point (max decibels) to the game’s dynamic music volume level.
-
 - **Ambient sounds remain unaffected**:
   - Ambient sounds, like crickets, are **NOT** overridden.
-
 - **Includes two free tracks**:
   - Both are Creative Commons licensed. See the **Credits** section for more info.
   - [YouTube Showcase](https://www.nexusmods.com/7daystodie/mods/6035?tab=videos#lg=2&slide=0)
   - The included tracks are in mp3 and wav formats.
-
 - **Supported file formats**:
   - mp3, wav, flac, and aiff.
-
 - **Randomized track playback**:
   - No two tracks play in the same order during a game session.
-
-
 
 ## User Resources
 - To add custom tracks to your game, you can use ~~[youtube-dl](https://github.com/ytdl-org/youtube-dl)~~, [yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp), a command-line program that allows you to download videos from YouTube.com and other video sites in mp3 format. This tool is legal to use for non-infringing purposes, such as downloading & converting public domain music or tracks you have purchased the rights to.
