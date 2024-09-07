@@ -180,7 +180,11 @@
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Website/@value"
                  Value="https://www.nexusmods.com/7daystodie/mods/$(ModId)"/>
 
-        <Exec Command="npm run generate_readme" WorkingDirectory="$(MSBuildProjectDirectory)\.."/>
+        <Exec
+                Condition=" '$(Configuration)' == 'Release' "
+                Command="npm run generate_readme"
+                WorkingDirectory="$(MSBuildProjectDirectory)\.."
+        />
         <Exec
                 Condition=" '$(Configuration)' == 'Release' "
                 Command="npm run build --prefix -- $(AbsoluteOutputPath) $(ModName) $(ModVersion)"
