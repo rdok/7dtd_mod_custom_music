@@ -102,6 +102,8 @@
         <Compile Include="Harmony\MainFactory.cs"/>
         <Compile Include="Harmony\MainTests.cs"/>
         <Compile Include="Harmony\ServicesTest.cs" />
+        <Compile Include="Harmony\Volume\VolumeAdjusterFactory.cs" />
+        <Compile Include="Harmony\Volume\VolumeAdjusterTests.cs" />
         <Compile Include="Harmony\Volume\VolumeAnalyzerFactory.cs"/>
         <Compile Include="Harmony\Volume\VolumeAnalyzerTests.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
