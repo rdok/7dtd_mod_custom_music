@@ -19,5 +19,11 @@ jobs:
       - name: Add NuGet private feed
         run: nuget sources Add -Name "GitHubPackages" -Source "https://nuget.pkg.github.com/rdok/index.json" -Username "rdok" -Password "${{ secrets.NUGET_API_KEY }}"
 
-      - name: Build and Test
-        run: dotnet test CustomMusic.sln
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build project
+        run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=Debug CustomMusic.sln
+      
+      - name: Run tests
+        run: dotnet test UnitTests/
