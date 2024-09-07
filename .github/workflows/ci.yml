@@ -16,14 +16,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v2
+      - name: Restore NuGet dependencies
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          dotnet restore UnitTests/UnitTests.csproj --configfile nuget.config
 
-      - name: Restore NuGet dependencies for UnitTests project
-        run: dotnet restore UnitTests/UnitTests.csproj --locked-mode
-
-      - name: Build the UnitTests project
-        run: msbuild UnitTests/UnitTests.csproj -t:rebuild -property:Configuration=Debug -verbosity:minimal
+      - name: Build the solution
+        run: msbuild UnitTests/UnitTests.csproj -property:Configuration=Debug
 
       - name: List build output
         run: |
