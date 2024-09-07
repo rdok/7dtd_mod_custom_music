@@ -19,8 +19,5 @@ jobs:
       - name: Add NuGet private feed
         run: nuget sources Add -Name "GitHubPackages" -Source "https://nuget.pkg.github.com/rdok/index.json" -Username "rdok" -Password "${{ secrets.NUGET_API_KEY }}"
 
-      - name: Set up MSBuild
-        uses: microsoft/setup-msbuild@v2
-
       - name: Build and Test
         run: dotnet test UnitTests/UnitTests.csproj
