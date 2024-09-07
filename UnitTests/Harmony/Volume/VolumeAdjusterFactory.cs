@@ -17,10 +17,12 @@ namespace UnitTests.Harmony.Volume
             { "VolumeRetrievalSuccess", true }
         };
 
-        public static (VolumeAdjuster volumeAdjuster, Mock<IAudioFileReaderAdapter> audioFileReaderMock, float dynamicMusicVolumeInDecibels, float preCalculatedMaxDecibel) Create(Dictionary<string, object> parameters = null)
+        public static (VolumeAdjuster volumeAdjuster, Mock<IAudioMixerAdapter>, Mock<IAudioFileReaderAdapter>
+            audioFileReaderMock, float dynamicMusicVolumeInDecibels, float preCalculatedMaxDecibel) Create(
+                Dictionary<string, object> parameters = null)
         {
             var loggerMock = new Mock<ILogger>();
-            var audioMixerMock = new Mock<IAudioMixerAdapter>();
+            var masterAudioMixerMock = new Mock<IAudioMixerAdapter>();
             var audioFileReaderMock = new Mock<IAudioFileReaderAdapter>();
 
             var combinedParameters = new Dictionary<string, object>(DefaultParameters);
@@ -36,12 +38,13 @@ namespace UnitTests.Harmony.Volume
             var preCalculatedMaxDecibel = (float)combinedParameters["PreCalculatedMaxDecibel"];
             var volumeRetrievalSuccess = (bool)combinedParameters["VolumeRetrievalSuccess"];
 
-            audioMixerMock.Setup(m => m.GetFloat("dmsVol", out dynamicMusicVolumeInDecibels))
+            masterAudioMixerMock.Setup(m => m.GetFloat("dmsVol", out dynamicMusicVolumeInDecibels))
                 .Returns(volumeRetrievalSuccess);
 
-            var volumeAdjuster = new VolumeAdjuster(audioMixerMock.Object, loggerMock.Object);
+            var volumeAdjuster = new VolumeAdjuster(loggerMock.Object);
 
-            return (volumeAdjuster, audioFileReaderMock, dynamicMusicVolumeInDecibels, preCalculatedMaxDecibel);
+            return (volumeAdjuster, masterAudioMixerMock, audioFileReaderMock, dynamicMusicVolumeInDecibels,
+                preCalculatedMaxDecibel);
         }
     }
 }

@@ -4,6 +4,10 @@ namespace CustomMusic.Harmony.Volume
 {
     public interface IVolumeAdjuster
     {
-        void Adjust(IAudioFileReaderAdapter audioFileReader, float preCalculatedMaxDecibel);
+        void Adjust(
+            IAudioMixerAdapter masterAudioMixer,
+            IAudioFileReaderAdapter audioFileReader,
+            float preCalculatedMaxDecibel
+        );
     }
 }

@@ -28,9 +28,11 @@ namespace CustomMusic.Harmony
         public static void Initialise()
         {
             var logger = new Logger();
-            
+
             Add<IHarmonyAdapter>(args => new HarmonyAdapter());
             Add<IVolumeAnalyzer>(args => new VolumeAnalyzer(logger));
+
+            Add<IVolumeAdjuster>(args => new VolumeAdjuster(logger));
         }
     }
 }
