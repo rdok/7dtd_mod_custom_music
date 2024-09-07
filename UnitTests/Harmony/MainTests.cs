@@ -18,5 +18,15 @@ namespace UnitTests.Harmony
                 Times.Once
             );
         }
+
+        [Test]
+        public void it_patches_all_classes()
+        {
+            var (main, harmonyMock, mod) = MainFactory.Create();
+
+            main.InitMod(mod);
+
+            harmonyMock.Verify(x => x.PatchAll(), Times.Once);
+        }
     }
 }
