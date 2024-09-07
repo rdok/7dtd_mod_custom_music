@@ -16,16 +16,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Restore NuGet dependencies in locked mode
-        run: dotnet restore --locked-mode
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
 
-      - name: Build the project
-        run: msbuild UnitTests/UnitTests.csproj /p:Configuration=Debug /p:CI_BUILD=true
+      - name: Restore NuGet dependencies for UnitTests project
+        run: dotnet restore UnitTests/UnitTests.csproj --locked-mode
+
+      - name: Build the UnitTests project
+        run: msbuild UnitTests/UnitTests.csproj -t:rebuild -property:Configuration=Debug -verbosity:minimal
 
       - name: List build output
         run: |
           dir UnitTests/bin/Debug
 
       - name: Run tests
-        run: |
-          dotnet vstest UnitTests/bin/Debug/UnitTests.dll
+        run: dotnet vstest UnitTests/bin/Debug/UnitTests.dll
