@@ -7,7 +7,7 @@ namespace CustomMusic.Harmony.Adapters
     public interface IAudioFileReaderAdapter : IDisposable, IWaveProvider
     {
         int Read(float[] buffer, int offset, int count);
-        IWaveFormatAdapter WaveFormat { get; }
+        new IWaveFormatAdapter WaveFormat { get; }
         long Position { get; set; }
         float Volume { get; set; }
     }

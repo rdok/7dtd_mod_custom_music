@@ -18,7 +18,7 @@ namespace CustomMusic.Harmony.Patch
         private static readonly Random Random = new Random();
         private static IAudioFileReaderAdapter _audioFileReader;
         public static bool IsMusicEnabled { get; set; } = true;
-        private static readonly IVolumeAdjuster VolumeAdjuster = Services.Get<IVolumeAdjuster>();
+        private static IVolumeAdjuster VolumeAdjuster;
 
         public static bool Prefix(Conductor __instance)
         {
@@ -75,12 +75,8 @@ namespace CustomMusic.Harmony.Patch
                 new AudioFileReader(customTracks[_currentTrackIndex])
             );
 
-            // Use the pre-calculated max decibel value for this track
-            var preCalculatedMaxDecibel = LoadTracksPatch.GetTrackMaxDecibel(customTracks[_currentTrackIndex]);
-
-            // Adjust volume based on pre-calculated max decibel
-            VolumeAdjuster.Adjust(_audioFileReader, preCalculatedMaxDecibel);
-
+            UpdateVolume();
+            
             OutputDevice.Init(_audioFileReader);
             OutputDevice.Play();
             Logger.Info($"Started playing {Path.GetFileName(customTracks[_currentTrackIndex])}.");
@@ -99,11 +95,13 @@ namespace CustomMusic.Harmony.Patch
             var customTracks = LoadTracksPatch.GetTracks();
             if (customTracks == null || customTracks.Length == 0) return;
 
-            // Reuse the pre-calculated max decibel value
             var preCalculatedMaxDecibel = LoadTracksPatch.GetTrackMaxDecibel(customTracks[_currentTrackIndex]);
+            Logger.Debug($"preCalculatedMaxDecibel {preCalculatedMaxDecibel}");
+            
+            var masterAudioMixer = new AudioMixerAdapter(GameManager.Instance.masterAudioMixer);
+            if(VolumeAdjuster == null) VolumeAdjuster = Services.Get<IVolumeAdjuster>();
+            VolumeAdjuster.Adjust(masterAudioMixer, _audioFileReader, preCalculatedMaxDecibel);
 
-            // Reuse the VolumeAdjuster to update the volume dynamically
-            VolumeAdjuster.Adjust(_audioFileReader, preCalculatedMaxDecibel);
             Logger.Info("Volume successfully updated for the currently playing track.");
         }
     }
