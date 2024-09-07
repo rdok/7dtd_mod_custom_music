@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using CustomMusic.Harmony.Adapters;
 using CustomMusic.Harmony.Volume;
 using Moq;
-using UnityEngine;
 using ILogger = CustomMusic.Harmony.ILogger;
 
 namespace UnitTests.Harmony.Volume

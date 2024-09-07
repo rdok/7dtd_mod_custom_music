@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using CustomMusic.Harmony.Adapters;
 using CustomMusic.Harmony.Volume;
-using Moq;
-using NAudio.Wave;
-using UnityEngine;
+using Moq;  
 using ILogger = CustomMusic.Harmony.ILogger;
 
 namespace UnitTests.Harmony.Volume
