@@ -13,16 +13,14 @@ namespace UnitTests.Harmony.Volume
     {
         private static readonly Dictionary<string, object> DefaultParameters = new()
         {
-            { "SampleRate", 3 },
+            { "SampleRate", 3 }, // Default buffer size
             { "NumberOfSamplesRead", new[] { 1f } },
-            { "MaxAmplitude", 1f },
-            { "ExpectedDecibels", 20 * Mathf.Log10(1f) }
+            { "MaxAmplitude", 1f }
         };
 
         public static (
             VolumeAnalyzer volumeAnalyzer,
-            Mock<IAudioFileReaderAdapter> audioFileReaderMock,
-            float expectedDecibels
+            Mock<IAudioFileReaderAdapter> audioFileReaderMock
             ) Create(Dictionary<string, object> parameters)
         {
             var loggerMock = new Mock<ILogger>();
@@ -35,21 +33,20 @@ namespace UnitTests.Harmony.Volume
                 combinedParameters[param.Key] = param.Value;
             }
 
-            var sampleRate = (int)combinedParameters["SampleRate"];
-            var maxAmplitude = (float)combinedParameters["MaxAmplitude"];
+            var sampleRate = (int)combinedParameters["SampleRate"]; // Buffer size is based on sample rate
             var numberOfSamplesRead = (float[])combinedParameters["NumberOfSamplesRead"];
-            var expectedDecibels = (float)combinedParameters["ExpectedDecibels"];
 
             waveFormatAdapter.Setup(w => w.SampleRate).Returns(sampleRate);
 
             audioFileReaderMock.Setup(m => m.Read(It.IsAny<float[]>(), 0, It.IsAny<int>()))
                 .Returns((float[] buffer, int offset, int count) =>
                 {
-                    if (numberOfSamplesRead.Length <= 0) return 0;
-                    var length = Math.Min(numberOfSamplesRead.Length, count);
-                    Array.Copy(numberOfSamplesRead, 0, buffer, 0, length);
-                    numberOfSamplesRead = numberOfSamplesRead.Skip(length).ToArray();
-
+                    var length = Math.Min(numberOfSamplesRead.Length, sampleRate); // Use sampleRate as buffer size
+                    if (length > 0)
+                    {
+                        Array.Copy(numberOfSamplesRead, 0, buffer, 0, length); // Copy to buffer based on sample rate
+                        numberOfSamplesRead = numberOfSamplesRead.Skip(length).ToArray();
+                    }
                     return length;
                 });
 
@@ -57,7 +54,7 @@ namespace UnitTests.Harmony.Volume
 
             var volumeAnalyzer = new VolumeAnalyzer(loggerMock.Object);
 
-            return (volumeAnalyzer, audioFileReaderMock, expectedDecibels);
+            return (volumeAnalyzer, audioFileReaderMock);
         }
     }
 }
