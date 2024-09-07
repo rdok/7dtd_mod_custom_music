@@ -1,0 +1,37 @@
+name: .NET Framework Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Find msbuild path
+        id: msbuild-locate
+        run: |
+          $msbuild_path = &"vswhere" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
+          echo "MSBUILD_PATH=$msbuild_path" >> $GITHUB_OUTPUT
+
+      - name: Restore NuGet dependencies in locked mode
+        run: dotnet restore --locked-mode
+
+      - name: Build the project
+        run: ${{ steps.msbuild-locate.outputs.MSBUILD_PATH }} UnitTests/UnitTests.csproj /p:Configuration=Debug
+
+      - name: List build output
+        run: |
+          dir UnitTests/bin/Debug
+
+      - name: Run tests
+        run: |
+          dotnet vstest UnitTests/bin/Debug/UnitTests.dll
