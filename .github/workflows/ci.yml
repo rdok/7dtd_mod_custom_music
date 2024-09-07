@@ -23,7 +23,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Build project
-        run: msbuild CustomMusic.sln -restore /p:Configuration="Debug"
+        run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=Debug CustomMusic.sln
       
       - name: List build output
         run: |
