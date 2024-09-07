@@ -11,10 +11,8 @@ namespace UnitTests.Harmony.Volume
         [Test]
         public void it_adjusts_volume_based_on_decibel_difference()
         {
-            var (
-                volumeAdjuster, audioFileReaderMock,
-                dynamicMusicVolumeInDecibels, preCalculatedMaxDecibel
-            ) = VolumeAdjusterFactory.Create();
+            var (volumeAdjuster, audioFileReaderMock, dynamicMusicVolumeInDecibels, preCalculatedMaxDecibel) =
+                VolumeAdjusterFactory.Create();
 
             volumeAdjuster.Adjust(audioFileReaderMock.Object, preCalculatedMaxDecibel);
 
@@ -24,16 +22,16 @@ namespace UnitTests.Harmony.Volume
             );
         }
 
-        // [Test]
-        // public void it_skips_adjustment_when_precalculated_decibel_is_negative_infinity()
-        // {
-        //     var (volumeAdjuster, audioFileReaderMock) = VolumeAdjusterFactory.Create();
-        //
-        //     volumeAdjuster.Adjust(audioFileReaderMock.Object, float.NegativeInfinity);
-        //
-        //     audioFileReaderMock.VerifySet(a => a.Volume = It.IsAny<float>(), Times.Never());
-        // }
-        //
+        [Test]
+        public void it_skips_adjustment_when_precalculated_decibel_is_negative_infinity()
+        {
+            var (volumeAdjuster, audioFileReaderMock, _, _) = VolumeAdjusterFactory.Create();
+
+            volumeAdjuster.Adjust(audioFileReaderMock.Object, float.NegativeInfinity);
+
+            audioFileReaderMock.VerifySet(a => a.Volume = It.IsAny<float>(), Times.Never());
+        }
+
         // [Test]
         // public void it_correctly_adjusts_volume_based_on_decibel_difference()
         // {
