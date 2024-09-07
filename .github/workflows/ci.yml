@@ -23,7 +23,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Build UnitTests project
-        run: msbuild UnitTests/UnitTests.csproj -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=Debug CustomMusic.sln
+        run: msbuild CustomMusic.sln /t:UnitTests /p:Configuration="Debug" /p:Platform="AnyCPU" /p:BuildProjectReferences=false
 
       - name: List build output
         run: |
