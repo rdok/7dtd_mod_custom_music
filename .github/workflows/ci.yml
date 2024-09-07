@@ -22,12 +22,5 @@ jobs:
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      - name: Build project
-        run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=Debug CustomMusic.sln
-      
-      - name: List build output
-        run: |
-          dir UnitTests/bin/Debug
-
-      - name: Run tests
-        run: dotnet vstest UnitTests/bin/Debug/UnitTests.dll
+      - name: Build and Test
+        run: dotnet test UnitTests/UnitTests.csproj
