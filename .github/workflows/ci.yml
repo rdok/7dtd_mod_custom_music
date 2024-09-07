@@ -20,4 +20,4 @@ jobs:
         run: nuget sources Add -Name "GitHubPackages" -Source "https://nuget.pkg.github.com/rdok/index.json" -Username "rdok" -Password "${{ secrets.NUGET_API_KEY }}"
 
       - name: Build and Test
-        run: dotnet test UnitTests/UnitTests.csproj
+        run: dotnet test CustomMusic.sln
