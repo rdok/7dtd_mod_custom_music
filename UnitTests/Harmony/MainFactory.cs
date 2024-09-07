@@ -13,7 +13,7 @@ namespace UnitTests.Harmony
             var harmonyMock = new Mock<IHarmony>();
             var main = new Main();
             var mod = new Mod();
-            Services.Add((args) => harmonyMock.Object);
+            Services.Add(_ => harmonyMock.Object);
 
             return (main, harmonyMock, mod);
         }

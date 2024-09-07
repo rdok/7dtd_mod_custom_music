@@ -11,7 +11,7 @@ namespace CustomMusic.Harmony
 
         public void InitMod(Mod modInstance)
         {
-            var harmony = Services.Resolve<IHarmony>();
+            var harmony = Services.Get<IHarmony>();
             harmony.Init("uk.co.rdok.7daystodie.mod.custom_music");
             harmony.PatchAll();
         }
