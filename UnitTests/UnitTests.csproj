@@ -50,30 +50,6 @@
         <PackageReference Include="Unity.Container" Version="5.11.11" />
     </ItemGroup>
 
-    <ItemGroup>
-        <Reference Include="0Harmony, Version=2.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-            <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
-        </Reference>
-        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-            <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
-        </Reference>
-        <Reference Include="LogLibrary, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-            <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
-        </Reference>
-        <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-            <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
-        </Reference>
-        <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-            <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-        </Reference>
-        <Reference Include="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-            <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\System.dll</HintPath>
-        </Reference>
-        <Reference Include="netstandard, Version=2.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-            <HintPath>..\packages\7dtd_nuget.1.0.3\lib\net48\7DaysToDie_Data\Managed\netstandard.dll</HintPath>
-        </Reference>
-
-    </ItemGroup>
 
     <ItemGroup>
         <Compile Include="Harmony\MainFactory.cs"/>
