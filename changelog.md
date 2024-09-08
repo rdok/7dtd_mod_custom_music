@@ -1,7 +1,8 @@
 ## Changelog
 
 #### v1.1.1 - 08-Sept-24
-- chore: CI. 
+- fix: Brief game freeze upon analyzing track to find max decibels first time.
+- chore: CI to run unit tests.
 - chore: Remove NAudio library; game already provides it.
 
 #### v1.1.0 - 07-Sept-24
