@@ -1,4 +1,5 @@
 [size=6]7 Days to Die Mod - Custom Music[/size]
+
 [url=https://next.nexusmods.com/7daystodie/collections/epfqzi][img]https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://www.nexusmods.com/7daystodie/mods/6035][img]https://img.shields.io/badge/Nexus%20Mod-Custom%20Music%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://github.com/rdok/7dtd_mod_custom_music][img]https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github[/img][/url] [url=https://github.com/rdok/7dtd_mod_custom_music/actions/workflows/ci.yml][img]https://github.com/rdok/7dtd_mod_custom_music/actions/workflows/ci.yml/badge.svg[/img][/url]
 
 [quote]
@@ -72,7 +73,3 @@
 [b]Track Link:[/b] https://www.free-stock-music.com/hayden-folker-the-red-desert.html
 [b]Description:[/b] Superb suspenseful cinematic music by Hayden Folker. "The Red Desert" is available under Creative Commons License - CC BY 3.0  and you can use it for your videos (even monetized) for free if you credit Hayden Folker  in your video description. MP3 and WAV audio formats are available for free download. The track's length is 01:20.
 [/quote]
-[size=5]Software Attribution[/size]
-[list]
-[*] To play the audio tracks this mod uses [url=https://github.com/naudio/NAudio]naudio/NAudio[/url], an Audio and MIDI library for .NET. As of the version [url=https://github.com/naudio/NAudio/releases/tag/v2.2.1]2.2.1[/url] this library can be used under MIT License. The MIT License is a permissive open-source license that allows software to be freely used, modified, distributed, and used for commercial purposes.
-[/list]

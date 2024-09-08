@@ -1,5 +1,6 @@
-# 7 Days to Die Mod - Custom Music
-[![nexus-mods-collection-immersive-hud](https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla)](https://next.nexusmods.com/7daystodie/collections/epfqzi) [![nexus-mods-page](https://img.shields.io/badge/Nexus%20Mod-Custom%20Music%20-orange?style=flat-square&logo=spinrilla)](https://www.nexusmods.com/7daystodie/mods/6035) [![github-repository](https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github)](https://github.com/rdok/7dtd_mod_custom_music) [![CI](https://github.com/rdok/7dtd_mod_custom_music/actions/workflows/ci.yml/badge.svg)](https://github.com/rdok/7dtd_mod_custom_music/actions/workflows/ci.yml)
+# 7 Days to Die Mod - Custom Music  
+
+[![nexus-mods-collection-immersive-hud](https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla)](https://next.nexusmods.com/7daystodie/collections/epfqzi) [![nexus-mods-page](https://img.shields.io/badge/Nexus%20Mod-Custom%20Music%20-orange?style=flat-square&logo=spinrilla)](https://www.nexusmods.com/7daystodie/mods/6035) [![github-repository](https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github)](https://github.com/rdok/7dtd_mod_custom_music) [![CI](https://github.com/rdok/7dtd_mod_custom_music/actions/workflows/ci.yml/badge.svg)](https://github.com/rdok/7dtd_mod_custom_music/actions/workflows/ci.yml)  
 
 > **Custom Music:** Easily replace the in-game dynamic music with your own tracks. Supported formats include mp3, wav, flac, and aiff.
 > **EAC:** This mod uses custom code that is not compatible with Easy Anti-Cheat.
@@ -57,7 +58,3 @@
 > **License Link:** https://creativecommons.org/licenses/by/3.0/deed.en_US  
 > **Track Link:** https://www.free-stock-music.com/hayden-folker-the-red-desert.html
 > **Description:** Superb suspenseful cinematic music by Hayden Folker. “The Red Desert” is available under Creative Commons License — CC BY 3.0  and you can use it for your videos (even monetized) for free if you credit Hayden Folker  in your video description. MP3 and WAV audio formats are available for free download. The track’s length is 01:20.
-
-## Software Attribution
-- To play the audio tracks this mod uses [naudio/NAudio](https://github.com/naudio/NAudio), an Audio and MIDI library for .NET. As of the version [2.2.1](https://github.com/naudio/NAudio/releases/tag/v2.2.1) this library can be used under MIT License. The MIT License is a permissive open-source license that allows software to be freely used, modified, distributed, and used for commercial purposes.
-
