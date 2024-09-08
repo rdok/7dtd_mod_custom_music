@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
             Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
     <PropertyGroup>
@@ -39,25 +38,16 @@
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
 
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+   
     <ItemGroup>
-        <PackageReference Include="NAudio" Version="2.2.1" />
-        <PackageReference Include="NAudio.Asio" Version="2.2.1" />
-        <PackageReference Include="NAudio.Core" Version="2.2.1" />
-        <PackageReference Include="NAudio.Midi" Version="2.2.1" />
-        <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
-        <PackageReference Include="NAudio.WinForms" Version="2.2.1" />
-        <PackageReference Include="NAudio.WinMM" Version="2.2.1" />
-        <PackageReference Include="System.Memory" Version="4.5.5" />
-        <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
-        <PackageReference Include="System.Text.Json" Version="7.0.2" />
-        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-        <PackageReference Include="System.ValueTuple" Version="4.5.0" />
-        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
-        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
-        <PackageReference Include="7dtd_nuget" Version="1.0.18" />
-    </ItemGroup>
-
-    <ItemGroup>
+        <PackageReference Include="7dtd_nuget" Version="1.0.23">
+            <PrivateAssets>all</PrivateAssets>
+            <ExcludeAssets>runtime;compile</ExcludeAssets>
+        </PackageReference>
+        <Content Include="ModInfo.xml">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Compile Include="Harmony\Adapters\AudioMixerAdapter.cs"/>
         <Compile Include="Harmony\Adapters\HarmonyAdapter.cs"/>
         <Compile Include="Harmony\Adapters\WaveFormatAdapter.cs"/>
@@ -76,6 +66,7 @@
         <Compile Include="Harmony\Volume\VolumeAdjuster.cs"/>
         <Compile Include="Harmony\Volume\VolumeAnalyzer.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
+        <None Include="App.config"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)' == 'Release'">
@@ -90,17 +81,6 @@
         </Content>
     </ItemGroup>
 
-    <ItemGroup>
-        <Content Include="ModInfo.xml">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="App.config"/>
-    </ItemGroup>
-
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 
     <Target Name="BeforeBuild">
         <RemoveDir Directories="$(OutputPath)"/>
@@ -126,5 +106,4 @@
                 WorkingDirectory="$(MSBuildProjectDirectory)\.."
         />
     </Target>
-
 </Project>

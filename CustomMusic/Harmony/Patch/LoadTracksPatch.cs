@@ -28,7 +28,7 @@ namespace CustomMusic.Harmony.Patch
             var musicDirectory = Path.Combine(modDirectory ?? throw missingModPathError, "DebugAmbientTracks");
              
 #if RELEASE
-            var musicDirectory = Path.Combine(modDirectory ?? throw missingModPathError, "AmbientTracks");
+            musicDirectory = Path.Combine(modDirectory ?? throw missingModPathError, "AmbientTracks");
 #endif
             Logger.Debug($"LoadTracks: Checking for music directory at {musicDirectory}. ");
 
