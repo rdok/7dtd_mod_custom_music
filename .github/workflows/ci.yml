@@ -28,6 +28,4 @@ jobs:
 
       - name: Run NUnit Tests
         run: |
-          "packages/NUnit.ConsoleRunner.3.18.1/tools/nunit3-console.exe" UnitTests/bin/Debug/UnitTests.dll
-
-
+          packages/NUnit.ConsoleRunner.3.18.1/tools/nunit3-console.exe UnitTests/bin/Debug/UnitTests.dll
