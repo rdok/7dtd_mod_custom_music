@@ -29,7 +29,12 @@ jobs:
       - name: Build UnitTests
         run: msbuild UnitTests/UnitTests.csproj -t:build -restore -p:Configuration=Debug
 
+      - name: List UnitTests output directory
+        run: dir UnitTests/bin/Debug
 
+      - name: List current directory contents
+        run: dir
+        
       - name: Run NUnit Tests
         run: |
           packages/NUnit.ConsoleRunner.3.18.1/tools/nunit3-console.exe UnitTests/bin/Debug/UnitTests.dll
