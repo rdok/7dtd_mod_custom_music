@@ -1,8 +1,9 @@
 ## Changelog
 
-#### v1.1.1 - 08-Sept-24
-- chore: CI. 
-- chore: Remove NAudio library; game already provides it.
+#### v1.1.1 - 09-Sept-24
+- fix: Improved performance by analyzing tracks asynchronously to calculate max decibels, preventing potential game freezes during audio processing.  
+- chore: Created CI pipeline to execute unit tests automatically, ensuring consistent test coverage across builds.
+- chore: Removed the redundant NAudio library dependency, utilizing the native audio functionality already provided by the game.
 
 #### v1.1.0 - 07-Sept-24
 

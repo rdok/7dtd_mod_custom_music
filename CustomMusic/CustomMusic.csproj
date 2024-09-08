@@ -39,7 +39,7 @@
         <WarningLevel>3</WarningLevel>
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
-   
+
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CI|AnyCPU' ">
         <OutputPath>bin\CI\</OutputPath>
     </PropertyGroup>
@@ -76,20 +76,24 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
-    
+
     <ItemGroup Condition="'$(Configuration)' == 'Debug'">
         <Content Include="AmbientTracksDebug\**">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(Configuration)' != 'CI' ">
+    <ItemGroup Condition=" '$(Configuration)' != 'CI' "> 
         <Reference Include="0Harmony">
             <HintPath>$(GamePath)\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
             <Private>False</Private>
         </Reference>
         <Reference Include="Assembly-CSharp">
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="NAudio">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\NAudio.dll</HintPath>
             <Private>False</Private>
         </Reference>
         <Reference Include="NAudio.WinMM">
@@ -102,10 +106,6 @@
         </Reference>
         <Reference Include="NAudio.Core">
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\NAudio.Core.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="NAudio">
-            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\NAudio.dll</HintPath>
             <Private>False</Private>
         </Reference>
         <Reference Include="LogLibrary">
