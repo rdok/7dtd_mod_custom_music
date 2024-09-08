@@ -25,7 +25,7 @@ namespace CustomMusic.Harmony.Patch
             var modPath = Assembly.GetExecutingAssembly().Location;
             var modDirectory = Path.GetDirectoryName(modPath);
             var missingModPathError = new InvalidOperationException($"Missing tracks directory: {modPath}");
-            var musicDirectory = Path.Combine(modDirectory ?? throw missingModPathError, "DebugAmbientTracks");
+            var musicDirectory = Path.Combine(modDirectory ?? throw missingModPathError, "AmbientTracksDebug");
              
 #if RELEASE
             musicDirectory = Path.Combine(modDirectory ?? throw missingModPathError, "AmbientTracks");

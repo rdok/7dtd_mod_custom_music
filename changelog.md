@@ -1,5 +1,9 @@
 ## Changelog
 
+#### v1.1.1 - 08-Sept-24
+- chore: CI. 
+- chore: Remove NAudio library; game already provides it.
+
 #### v1.1.0 - 07-Sept-24
 
 - feat: Dynamically adjust each track volume based on their differences with the dynamic music volume in decibels.

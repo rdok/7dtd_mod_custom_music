@@ -14,22 +14,27 @@
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>9</LangVersion>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+   
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <OutputPath>bin\Debug\</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CI|AnyCPU' ">
+        <OutputPath>bin\CI\</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
         <ProjectReference
                 Include="..\CustomMusic\CustomMusic.csproj"
-                Condition="'$(Configuration)' == 'Debug'"
+                Condition="'$(Configuration)' == 'Debug' OR '$(Configuration)' == 'CI'"
         >
             <Project>{90a1b09c-9b78-4c0b-88b1-4928f311d376}</Project>
             <Name>CustomMusic</Name>

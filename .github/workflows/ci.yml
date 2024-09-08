@@ -22,8 +22,8 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Build solution
-        run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=Debug CustomMusic.sln
+        run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=CI CustomMusic.sln
 
       - name: Run NUnit Tests
         run: |
-          & "UnitTests/bin/Debug/nunit3-console.exe" UnitTests/bin/Debug/UnitTests.dll
+          & "UnitTests/bin/CI/nunit3-console.exe" UnitTests/bin/Debug/UnitTests.dll

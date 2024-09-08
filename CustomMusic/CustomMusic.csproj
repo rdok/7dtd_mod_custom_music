@@ -13,16 +13,18 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModName>CustomMusic</ModName>
-        <ModVersion>1.1.0</ModVersion>
+        <ModVersion>1.1.1</ModVersion>
         <ModDescription>Replace the dynamic music with your own music.</ModDescription>
         <ModId>6035</ModId>
+        <GamePath>..\..\..\..\Steam\steamapps\common\7 Days To Die</GamePath>
+        <ModsPath>..\..\..\..\vortex_udf_7_days_to_die\Mods</ModsPath>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>..\..\..\..\vortex_udf_7_days_to_die\Mods\ZZZZ_CustomMusic</OutputPath>
+        <OutputPath>$(ModsPath)\ZZZZ_CustomMusic</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -37,14 +39,15 @@
         <WarningLevel>3</WarningLevel>
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
+   
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CI|AnyCPU' ">
+        <OutputPath>bin\CI\</OutputPath>
+    </PropertyGroup>
 
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
-   
+
+
     <ItemGroup>
-        <PackageReference Include="7dtd_nuget" Version="1.0.23">
-            <PrivateAssets>all</PrivateAssets>
-            <ExcludeAssets>runtime;compile</ExcludeAssets>
-        </PackageReference>
         <Content Include="ModInfo.xml">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -66,7 +69,6 @@
         <Compile Include="Harmony\Volume\VolumeAdjuster.cs"/>
         <Compile Include="Harmony\Volume\VolumeAnalyzer.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <None Include="App.config"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)' == 'Release'">
@@ -74,19 +76,57 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
-
+    
     <ItemGroup Condition="'$(Configuration)' == 'Debug'">
         <Content Include="AmbientTracksDebug\**">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
 
+    <ItemGroup Condition=" '$(Configuration)' != 'CI' ">
+        <Reference Include="0Harmony">
+            <HintPath>$(GamePath)\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="NAudio.WinMM">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\NAudio.WinMM.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="NAudio.Core">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\NAudio.Core.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="NAudio">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\NAudio.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="LogLibrary">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)' == 'CI'">
+        <PackageReference Include="7dtd_nuget" Version="1.0.23"/>
+    </ItemGroup>
 
     <Target Name="BeforeBuild">
         <RemoveDir Directories="$(OutputPath)"/>
     </Target>
 
-    <Target Name="AfterBuild">
+    <Target Name="AfterBuild" Condition=" '$(Configuration)' != 'CI' ">
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Name/@value" Value="$(ModName)"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/DisplayName/@value" Value="$(ModName)"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Author/@value" Value="Rizarttt"/>
