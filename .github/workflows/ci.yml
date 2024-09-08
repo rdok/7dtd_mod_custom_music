@@ -27,6 +27,6 @@ jobs:
         run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=Debug CustomMusic.sln
 
       - name: Run NUnit Tests
+        working-directory: UnitTests/bin/Debug
         run: |
-          & "packages/NUnit.ConsoleRunner.3.18.1/tools/nunit3-console.exe" CustomMusic.sln
-
+          & "packages/NUnit.ConsoleRunner.3.18.1/tools/nunit3-console.exe" UnitTests.dll
