@@ -15,17 +15,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '4.8.x'
       - name: Add NuGet private feed
         run: nuget sources Add -Name "GitHubPackages" -Source "https://nuget.pkg.github.com/rdok/index.json" -Username "rdok" -Password "${{ secrets.NUGET_API_KEY }}"
-
-      - name: Set up MSBuild
-        uses: microsoft/setup-msbuild@v2
-
-      - name: Build project
-        run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=Debug CustomMusic.sln
-      
-      - name: Run tests
-        run: vstest.console bin\Debug\UnitTests.dll
-#      - name: Run tests
-#        run: dotnet test UnitTests
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build
+      - name: Test with the dotnet CLI
+        run: dotnet test
