@@ -88,7 +88,7 @@ namespace CustomMusic.Harmony.Patch
         {
             if (_audioFileReader == null)
             {
-                Logger.Error("No audio file loaded. Skipping volume update.");
+                Logger.Debug("No audio file loaded. Skipping volume update.");
                 return;
             }
 
