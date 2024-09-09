@@ -1,11 +1,17 @@
 # 7 Days to Die Mod - Custom Music  
 
-[![nexus-mods-collection-immersive-hud](https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla)](https://next.nexusmods.com/7daystodie/collections/epfqzi) [![nexus-mods-page](https://img.shields.io/badge/Nexus%20Mod-Custom%20Music%20-orange?style=flat-square&logo=spinrilla)](https://www.nexusmods.com/7daystodie/mods/6035) [![github-repository](https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github)](https://github.com/rdok/7dtd_mod_custom_music) [![CI](https://github.com/rdok/7dtd_mod_custom_music/actions/workflows/ci.yml/badge.svg)](https://github.com/rdok/7dtd_mod_custom_music/actions/workflows/ci.yml)  
+[![nexus-mods-collection-immersive-hud](https://img.shields.io/badge/Collection-Immersive%20HUD%20-f85c2a?style=flat-square&logo=nexusmods)](https://next.nexusmods.com/7daystodie/collections/epfqzi) [![nexus-mods-page](https://img.shields.io/badge/Mod-Custom%20Music%20-f85c2a?style=flat-square&logo=nexusmods)](https://www.nexusmods.com/7daystodie/mods/6035) [![github-repository](https://img.shields.io/badge/GitHub-Repository-2ea44f?style=flat-square&logo=github)](https://github.com/rdok/7dtd_mod_custom_music) [![CI](https://img.shields.io/github/actions/workflow/status/rdok/7dtd_mod_custom_music/ci.yml?branch=main&label=CI&logo=github&logoColor=white&style=flat-square&color=2ea44f)](https://github.com/rdok/7dtd_mod_custom_music/actions/workflows/ci.yml)
 
-> **Custom Music:** Easily replace the in-game dynamic music with your own tracks. Supported formats include mp3, wav, flac, and aiff.
+> **Custom Music:** Easily replace the in-game dynamic music with your own tracks. Supported formats include mp3, wav, flac, and aiff.  
 > **EAC:** This mod uses custom code that is not compatible with Easy Anti-Cheat.
 
 [![Showcase](https://github.com/rdok/7dtd_mod_custom_music/blob/main/documentation/showcase.jpg?raw=true)](https://www.nexusmods.com/7daystodie/mods/6035)
+
+## Installation
+- Game Version: 1.0. 
+- Install with [Vortex](https://www.nexusmods.com/about/vortex/).
+- Put your music tracks in the `{your_mod_path}/AmbientTracks`. 
+- See `User Resources` section below for additional help.
 
 ## Features
 
