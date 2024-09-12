@@ -1,8 +1,6 @@
-using System;
 using CustomMusic.Harmony;
 using CustomMusic.Harmony.Adapters;
 using Moq;
-using NAudio.Wave;
 
 namespace UnitTests.Harmony
 {

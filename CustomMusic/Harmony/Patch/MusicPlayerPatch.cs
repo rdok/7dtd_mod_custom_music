@@ -1,10 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using CustomMusic.Harmony.Adapters;
 using CustomMusic.Harmony.Volume;
 using DynamicMusic;
 using HarmonyLib;
 using NAudio.Wave;
+using UnityEngine;
+using Random = System.Random;
 
 namespace CustomMusic.Harmony.Patch
 {
@@ -76,7 +77,7 @@ namespace CustomMusic.Harmony.Patch
             );
 
             UpdateVolume();
-            
+
             OutputDevice.Init(_audioFileReader);
             OutputDevice.Play();
             Logger.Info($"Started playing {Path.GetFileName(customTracks[_currentTrackIndex])}.");
@@ -97,10 +98,13 @@ namespace CustomMusic.Harmony.Patch
 
             var preCalculatedMaxDecibel = LoadTracksPatch.GetTrackMaxDecibel(customTracks[_currentTrackIndex]);
             Logger.Debug($"preCalculatedMaxDecibel {preCalculatedMaxDecibel}");
-            
+
             var masterAudioMixer = new AudioMixerAdapter(GameManager.Instance.masterAudioMixer);
-            if(VolumeAdjuster == null) VolumeAdjuster = Services.Get<IVolumeAdjuster>();
-            VolumeAdjuster.Adjust(masterAudioMixer, _audioFileReader, preCalculatedMaxDecibel);
+            if (VolumeAdjuster == null) VolumeAdjuster = Services.Get<IVolumeAdjuster>();
+
+            var overallAudioVolumeLevel =
+                Mathf.Min(GamePrefs.GetFloat(EnumGamePrefs.OptionsOverallAudioVolumeLevel), 1f);
+            VolumeAdjuster.Adjust(masterAudioMixer, _audioFileReader, overallAudioVolumeLevel, preCalculatedMaxDecibel);
 
             Logger.Debug("Volume successfully updated for the currently playing track.");
         }

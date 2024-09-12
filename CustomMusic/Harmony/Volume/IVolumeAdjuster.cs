@@ -7,6 +7,7 @@ namespace CustomMusic.Harmony.Volume
         void Adjust(
             IAudioMixerAdapter masterAudioMixer,
             IAudioFileReaderAdapter audioFileReader,
+            float overallAudioVolumeLevel,
             float preCalculatedMaxDecibel
         );
     }
