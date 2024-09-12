@@ -15,6 +15,7 @@ namespace CustomMusic.Harmony.Volume
         public void Adjust(
             IAudioMixerAdapter masterAudioMixer,
             IAudioFileReaderAdapter audioFileReader,
+            float overallAudioVolumeLevel,
             float preCalculatedMaxDecibel
         )
         {
@@ -39,7 +40,6 @@ namespace CustomMusic.Harmony.Volume
 
             var adjustmentFactor = Mathf.Pow(10, decibelDifference / 20);
 
-            // Log adjustment factor as percentage
             var adjustmentPercentage = adjustmentFactor * 100;
             _logger.Debug($"Adjustment factor: {adjustmentPercentage:F2}%");
 
@@ -58,7 +58,7 @@ namespace CustomMusic.Harmony.Volume
 
             _logger.Debug($"Adjustment bar: [{adjustmentBar}]");
 
-            audioFileReader.Volume = adjustmentFactor;
+            audioFileReader.Volume = adjustmentFactor * overallAudioVolumeLevel;
             _logger.Debug($"Final volume applied: {audioFileReader.Volume:F2}");
         }
     }

@@ -13,7 +13,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModName>CustomMusic</ModName>
-        <ModVersion>1.1.1</ModVersion>
+        <ModVersion>1.1.2</ModVersion>
         <ModDescription>Replace the dynamic music with your own music.</ModDescription>
         <ModId>6035</ModId>
         <GamePath>..\..\..\..\Steam\steamapps\common\7 Days To Die</GamePath>
@@ -45,7 +45,6 @@
     </PropertyGroup>
 
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
-
 
     <ItemGroup>
         <Content Include="ModInfo.xml">
@@ -120,8 +119,8 @@
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
             <Private>False</Private>
         </Reference>
-        <Reference Include="System.Runtime.CompilerServices.Unsafe">
-            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+        <Reference Include="NAudio.Wasapi">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\NAudio.Wasapi.dll</HintPath>
             <Private>False</Private>
         </Reference>
     </ItemGroup>
@@ -153,5 +152,7 @@
                 Command="npm run build --prefix -- $(AbsoluteOutputPath) $(ModName) $(ModVersion)"
                 WorkingDirectory="$(MSBuildProjectDirectory)\.."
         />
+
+
     </Target>
 </Project>

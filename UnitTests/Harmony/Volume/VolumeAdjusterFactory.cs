@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CustomMusic.Harmony.Adapters;
 using CustomMusic.Harmony.Volume;
@@ -11,13 +10,12 @@ namespace UnitTests.Harmony.Volume
     {
         private static readonly Dictionary<string, object> DefaultParameters = new()
         {
-            { "DynamicMusicVolumeInDecibels", -6f },
-            { "PreCalculatedMaxDecibel", 0f },
+            { "DynamicMusicVolumeInDecibels", 0f },
             { "VolumeRetrievalSuccess", true }
         };
 
-        public static (VolumeAdjuster volumeAdjuster, Mock<IAudioMixerAdapter>, Mock<IAudioFileReaderAdapter>
-            audioFileReaderMock, float dynamicMusicVolumeInDecibels, float preCalculatedMaxDecibel) Create(
+        public static (VolumeAdjuster volumeAdjuster, Mock<IAudioMixerAdapter> masterAudioMixerMock,
+            Mock<IAudioFileReaderAdapter> audioFileReaderMock) Create(
                 Dictionary<string, object> parameters = null)
         {
             var loggerMock = new Mock<ILogger>();
@@ -26,15 +24,10 @@ namespace UnitTests.Harmony.Volume
 
             var combinedParameters = new Dictionary<string, object>(DefaultParameters);
             if (parameters != null)
-            {
                 foreach (var param in parameters)
-                {
                     combinedParameters[param.Key] = param.Value;
-                }
-            }
 
             var dynamicMusicVolumeInDecibels = (float)combinedParameters["DynamicMusicVolumeInDecibels"];
-            var preCalculatedMaxDecibel = (float)combinedParameters["PreCalculatedMaxDecibel"];
             var volumeRetrievalSuccess = (bool)combinedParameters["VolumeRetrievalSuccess"];
 
             masterAudioMixerMock.Setup(m => m.GetFloat("dmsVol", out dynamicMusicVolumeInDecibels))
@@ -42,8 +35,7 @@ namespace UnitTests.Harmony.Volume
 
             var volumeAdjuster = new VolumeAdjuster(loggerMock.Object);
 
-            return (volumeAdjuster, masterAudioMixerMock, audioFileReaderMock, dynamicMusicVolumeInDecibels,
-                preCalculatedMaxDecibel);
+            return (volumeAdjuster, masterAudioMixerMock, audioFileReaderMock);
         }
     }
 }
