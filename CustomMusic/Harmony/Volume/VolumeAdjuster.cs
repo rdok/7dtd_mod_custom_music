@@ -39,7 +39,6 @@ namespace CustomMusic.Harmony.Volume
 
             var adjustmentFactor = Mathf.Pow(10, decibelDifference / 20);
 
-            // Log adjustment factor as percentage
             var adjustmentPercentage = adjustmentFactor * 100;
             _logger.Debug($"Adjustment factor: {adjustmentPercentage:F2}%");
 

@@ -40,6 +40,8 @@
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
 
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+   
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CI|AnyCPU' ">
         <OutputPath>bin\CI\</OutputPath>
     </PropertyGroup>
@@ -117,8 +119,8 @@
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
             <Private>False</Private>
         </Reference>
-        <Reference Include="System.Runtime.CompilerServices.Unsafe">
-            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+        <Reference Include="NAudio.Wasapi">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\NAudio.Wasapi.dll</HintPath>
             <Private>False</Private>
         </Reference>
     </ItemGroup>
@@ -150,8 +152,7 @@
                 Command="npm run build --prefix -- $(AbsoluteOutputPath) $(ModName) $(ModVersion)"
                 WorkingDirectory="$(MSBuildProjectDirectory)\.."
         />
-        
-        <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+
 
     </Target>
 </Project>
