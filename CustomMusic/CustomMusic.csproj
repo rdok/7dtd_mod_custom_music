@@ -13,7 +13,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModName>CustomMusic</ModName>
-        <ModVersion>1.1.1</ModVersion>
+        <ModVersion>1.1.2</ModVersion>
         <ModDescription>Replace the dynamic music with your own music.</ModDescription>
         <ModId>6035</ModId>
         <GamePath>..\..\..\..\Steam\steamapps\common\7 Days To Die</GamePath>
