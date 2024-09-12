@@ -46,6 +46,10 @@
         <PackageReference Include="NUnit" Version="3.5.0"/>
     </ItemGroup>
 
+    <ItemGroup Condition="'$(Configuration)' == 'CI'">
+        <PackageReference Include="7dtd_nuget" Version="1.0.23"/>
+    </ItemGroup>
+
     <ItemGroup Condition=" '$(Configuration)' != 'CI' ">
         <Reference Include="0Harmony">
             <HintPath>$(GamePath)\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
@@ -86,10 +90,6 @@
         <Reference Include="System.Runtime.CompilerServices.Unsafe">
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
         </Reference>
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)' == 'CI'">
-        <PackageReference Include="7dtd_nuget" Version="1.0.23"/>
     </ItemGroup>
 
     <ItemGroup>

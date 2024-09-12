@@ -44,9 +44,6 @@
         <OutputPath>bin\CI\</OutputPath>
     </PropertyGroup>
 
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
-
-
     <ItemGroup>
         <Content Include="ModInfo.xml">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -153,5 +150,8 @@
                 Command="npm run build --prefix -- $(AbsoluteOutputPath) $(ModName) $(ModVersion)"
                 WorkingDirectory="$(MSBuildProjectDirectory)\.."
         />
+        
+        <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+
     </Target>
 </Project>
