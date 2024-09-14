@@ -3,6 +3,7 @@ using CustomMusic.Harmony.Adapters;
 using CustomMusic.Harmony.Volume;
 using DynamicMusic;
 using HarmonyLib;
+using MusicUtils.Enums;
 using NAudio.Wave;
 using UnityEngine;
 using Random = System.Random;
@@ -20,9 +21,28 @@ namespace CustomMusic.Harmony.Patch
         private static IAudioFileReaderAdapter _audioFileReader;
         public static bool IsMusicEnabled { get; set; } = true;
         private static IVolumeAdjuster VolumeAdjuster;
+        private static string _currentTrackPath;
 
         public static bool Prefix(Conductor __instance)
         {
+            // Ensure __instance is not null
+            if (__instance == null)
+            {
+                Logger.Error("MusicPlayerPatch: __instance (Conductor) is null.");
+                return true; // Let the original method run
+            }
+
+            // Get the current section type directly
+            var sectionType = __instance.CurrentSectionType;
+            Logger.Debug($"Game wants to play section: {sectionType}");
+
+            if (__instance.sectionSelector != null)
+            {
+                var key = __instance.sectionSelector.Select();
+                Logger.Debug($"__instance.sectionSelector.Select(): {key}");
+            }
+
+            // Now you can use 'sectionType' to decide which music to play
             if (!IsMusicEnabled)
             {
                 StopMusic();
@@ -30,10 +50,10 @@ namespace CustomMusic.Harmony.Patch
                 return false;
             }
 
-            var customTracks = LoadTracksPatch.GetTracks();
+            var customTracks = LoadTracksPatch.GetTracksForSection(sectionType);
             if (customTracks == null || customTracks.Length == 0)
             {
-                Logger.Debug("No custom music loaded, skipping Update.");
+                Logger.Debug($"No custom music loaded for section {sectionType}, skipping Update.");
                 return false;
             }
 
@@ -47,7 +67,7 @@ namespace CustomMusic.Harmony.Patch
 
             Logger.Debug("No music currently playing, starting next track.");
 
-            PlayRandomTrack();
+            PlayRandomTrackBasedOnSection(customTracks, sectionType);
 
             return false;
         }
@@ -57,30 +77,39 @@ namespace CustomMusic.Harmony.Patch
             _audioFileReader?.Dispose();
 
             OutputDevice?.Dispose();
+            OutputDevice = null;
 
             Logger.Debug("Stopped output device.");
         }
 
-        public static void PlayRandomTrack()
+        public static void PlayRandomTrackBasedOnSection(string[] customTracks, SectionType sectionType)
         {
-            var customTracks = LoadTracksPatch.GetTracks();
+            if (customTracks == null || customTracks.Length == 0)
+            {
+                Logger.Debug($"No custom tracks for section {sectionType}, skipping playback.");
+                return;
+            }
 
             do
             {
                 _currentTrackIndex = Random.Next(customTracks.Length);
             } while (_currentTrackIndex == _previousTrackIndex && customTracks.Length > 1);
 
-            Logger.Debug($"Selected track {_currentTrackIndex + 1} of {customTracks.Length}.");
+            Logger.Debug(
+                $"Selected track {_currentTrackIndex + 1} of {customTracks.Length} for section {sectionType}.");
 
             _audioFileReader = new AudioFileReaderAdapter(
                 new AudioFileReader(customTracks[_currentTrackIndex])
             );
 
+            _currentTrackPath = customTracks[_currentTrackIndex]; // Store the current track path
+
             UpdateVolume();
 
             OutputDevice.Init(_audioFileReader);
             OutputDevice.Play();
-            Logger.Info($"Started playing {Path.GetFileName(customTracks[_currentTrackIndex])}.");
+            Logger.Info(
+                $"Started playing {Path.GetFileName(customTracks[_currentTrackIndex])} for section {sectionType}.");
 
             _previousTrackIndex = _currentTrackIndex;
         }
@@ -93,11 +122,14 @@ namespace CustomMusic.Harmony.Patch
                 return;
             }
 
-            var customTracks = LoadTracksPatch.GetTracks();
-            if (customTracks == null || customTracks.Length == 0) return;
+            if (string.IsNullOrEmpty(_currentTrackPath))
+            {
+                Logger.Debug("No track path available for the currently playing track. Skipping volume update.");
+                return;
+            }
 
-            var preCalculatedMaxDecibel = LoadTracksPatch.GetTrackMaxDecibel(customTracks[_currentTrackIndex]);
-            Logger.Debug($"preCalculatedMaxDecibel {preCalculatedMaxDecibel}");
+            var preCalculatedMaxDecibel = LoadTracksPatch.GetTrackMaxDecibel(_currentTrackPath);
+            Logger.Debug($"preCalculatedMaxDecibel {_currentTrackPath}: {preCalculatedMaxDecibel}");
 
             var masterAudioMixer = new AudioMixerAdapter(GameManager.Instance.masterAudioMixer);
             if (VolumeAdjuster == null) VolumeAdjuster = Services.Get<IVolumeAdjuster>();
