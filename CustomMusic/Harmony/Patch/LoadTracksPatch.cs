@@ -8,6 +8,7 @@ using CustomMusic.Harmony.Adapters;
 using CustomMusic.Harmony.Volume;
 using DynamicMusic;
 using HarmonyLib;
+using MusicUtils.Enums;
 using NAudio.Wave;
 
 namespace CustomMusic.Harmony.Patch
@@ -16,7 +17,10 @@ namespace CustomMusic.Harmony.Patch
     public static class LoadTracksPatch
     {
         private static readonly ILogger Logger = new Logger();
-        private static string[] _tracks;
+
+        private static string[] _ambientTracks;
+        private static string[] _combatTracks;
+
         private static readonly Dictionary<string, float> TrackMaxDecibels = new Dictionary<string, float>();
 
         public static bool Prefix()
@@ -25,28 +29,46 @@ namespace CustomMusic.Harmony.Patch
 
             var modPath = Assembly.GetExecutingAssembly().Location;
             var modDirectory = Path.GetDirectoryName(modPath);
-            var missingModPathError = new InvalidOperationException($"Missing tracks directory: {modPath}");
-            var musicDirectory = Path.Combine(modDirectory ?? throw missingModPathError, "AmbientTracksDebug");
-
-#if RELEASE
-            musicDirectory = Path.Combine(modDirectory ?? throw missingModPathError, "AmbientTracks");
-#endif
-            Logger.Debug($"LoadTracks: Checking for music directory at {musicDirectory}. ");
+            if (modDirectory == null)
+            {
+                Logger.Error("LoadTracks: Could not determine mod directory.");
+                return false;
+            }
 
             string[] validExtensions = { ".mp3", ".wav", ".aiff", ".flac" };
 
-            _tracks = Directory.GetFiles(musicDirectory, "*.*")
+            // Load Ambient Tracks
+            var ambientDirectory = Path.Combine(modDirectory, "AmbientTracksDebug");
+#if RELEASE
+            musicDirectory = Path.Combine(modDirectory ?? throw missingModPathError, "AmbientTracks");
+#endif
+            
+            Logger.Debug($"LoadTracks: Checking for ambient music directory at {ambientDirectory}.");
+            _ambientTracks = Directory.GetFiles(ambientDirectory, "*.*")
                 .Where(file => validExtensions.Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
                 .ToArray();
+            Logger.Debug(
+                $"LoadTracks: Found {_ambientTracks.Length} supported ambient audio files in {ambientDirectory}.");
 
-            Logger.Debug($"LoadTracks: Found {_tracks.Length} supported audio files in {musicDirectory}.");
-
-            if (_tracks.Length == 0)
+            // If no ambient tracks are found, throw an error
+            if (_ambientTracks.Length == 0)
             {
-                Logger.Debug(
-                    $"LoadTracks: No supported audio files found in {musicDirectory}. Please add audio files to this directory.");
-                return false;
+                Logger.Error(
+                    $"LoadTracks: No supported ambient audio files found in {ambientDirectory}. Please add audio files to this directory.");
+                throw new FileNotFoundException($"No ambient tracks found in {ambientDirectory}.");
             }
+
+            // Load Combat Tracks
+            var combatDirectory = Path.Combine(modDirectory, "CombatTracksDebug");
+#if RELEASE
+            musicDirectory = Path.Combine(modDirectory ?? throw missingModPathError, "CombatTracks");
+#endif
+            Logger.Debug($"LoadTracks: Checking for combat music directory at {combatDirectory}.");
+            _combatTracks = Directory.GetFiles(combatDirectory, "*.*")
+                .Where(file => validExtensions.Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+                .ToArray();
+            Logger.Debug(
+                $"LoadTracks: Found {_combatTracks.Length} supported combat audio files in {combatDirectory}.");
 
             Logger.Debug("LoadTracks: Calculating max decibels for all tracks asynchronously.");
             Task.Run(CalculateMaxDecibelsForAllTracks);
@@ -57,7 +79,8 @@ namespace CustomMusic.Harmony.Patch
 
         private static async Task CalculateMaxDecibelsForAllTracks()
         {
-            var tasks = _tracks.Select(track => Task.Run(() => CalculateAndStoreMaxDecibel(track))).ToArray();
+            var allTracks = _ambientTracks.Concat(_combatTracks).ToArray();
+            var tasks = allTracks.Select(track => Task.Run(() => CalculateAndStoreMaxDecibel(track))).ToArray();
             await Task.WhenAll(tasks);
         }
 
@@ -75,9 +98,15 @@ namespace CustomMusic.Harmony.Patch
             }
         }
 
-        public static string[] GetTracks()
+        public static string[] GetTracksForSection(SectionType sectionType)
         {
-            return _tracks;
+            switch (sectionType)
+            {
+                case SectionType.Combat:
+                    return _combatTracks;
+                default:
+                    return _ambientTracks; // Default to ambient tracks if section type is unknown
+            }
         }
 
         public static float GetTrackMaxDecibel(string trackPath)
